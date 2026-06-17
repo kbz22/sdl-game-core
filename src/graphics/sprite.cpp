@@ -1,0 +1,45 @@
+#include "sgc/graphics/sprite.hpp"
+
+sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, sgc::math::uvec2 gridPosition) :
+    m_tileset(std::move(tileset)),
+    m_gridPosition(gridPosition)
+{}
+
+void sgc::graphics::Sprite::SetTilesetPosition(sgc::math::uvec2 gridPosition)
+{
+    m_gridPosition.x = gridPosition.x;
+    m_gridPosition.y = gridPosition.y;
+}
+
+void sgc::graphics::Sprite::SetPositionPx(sgc::math::vec2 position)
+{
+    m_position = position;
+}
+
+void sgc::graphics::Sprite::SetRenderer(SDL_Renderer *renderer)
+{
+    m_renderer = renderer;
+}
+
+void sgc::graphics::Sprite::Draw()
+{    
+    if (!m_renderer) {
+        return;
+    }
+
+    auto texture = m_tileset->GetTexture();
+
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(texture, 255);
+
+    SDL_FRect dstRect = {
+        static_cast<float>(m_position.x),
+        static_cast<float>(m_position.y),
+        static_cast<float>(m_tileset->m_tileSize.x),
+        static_cast<float>(m_tileset->m_tileSize.y)
+    };
+
+    SDL_FRect srcRect = m_tileset->GetTileRect(m_gridPosition);
+    
+    SDL_RenderTexture(m_renderer, texture, &srcRect, &dstRect);
+}

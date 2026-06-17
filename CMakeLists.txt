@@ -1,0 +1,73 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(sdl-game)
+
+# C++
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Get SDL paths from environment variables
+set(SDL_INCLUDE_PATH $ENV{SDL_INCLUDE_PATH})
+set(SDL_LIB_PATH $ENV{SDL_LIB_PATH})
+set(SDL_IMAGE_INCLUDE_PATH $ENV{SDL_IMAGE_INCLUDE_PATH})
+set(SDL_IMAGE_LIB_PATH $ENV{SDL_IMAGE_LIB_PATH})
+set(SDL_TTF_INCLUDE_PATH $ENV{SDL_TTF_INCLUDE_PATH})
+set(SDL_TTF_LIB_PATH $ENV{SDL_TTF_LIB_PATH})
+
+if(NOT SDL_INCLUDE_PATH)
+    message(FATAL_ERROR "SDL_INCLUDE_PATH environment variable is not set")
+endif()
+
+if(NOT SDL_LIB_PATH)
+    message(FATAL_ERROR "SDL_LIB_PATH environment variable is not set")
+endif()
+
+if(NOT SDL_IMAGE_INCLUDE_PATH)
+    message(FATAL_ERROR "SDL_IMAGE_INCLUDE_PATH environment variable is not set")
+endif()
+
+if(NOT SDL_IMAGE_LIB_PATH)
+    message(FATAL_ERROR "SDL_IMAGE_LIB_PATH environment variable is not set")
+endif()
+
+if(NOT SDL_TTF_INCLUDE_PATH)
+    message(FATAL_ERROR "SDL_TTF_INCLUDE_PATH environment variable is not set")
+endif()
+
+if(NOT SDL_TTF_LIB_PATH)
+    message(FATAL_ERROR "SDL_TTF_LIB_PATH environment variable is not set")
+endif()
+
+add_library(sdl-game-core STATIC
+    src/debug/log.cpp
+
+    src/graphics/image.cpp
+    src/graphics/rectangle.cpp
+    src/graphics/sprite.cpp
+    src/graphics/tiled_static_layer.cpp
+    src/graphics/tileset.cpp
+)
+
+option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)
+
+target_include_directories(sdl-game-core PUBLIC    
+    ${CMAKE_SOURCE_DIR}/inc
+    ${SDL_INCLUDE_PATH}
+    ${SDL_IMAGE_INCLUDE_PATH}
+    ${SDL_TTF_INCLUDE_PATH}
+)
+
+target_link_directories(sdl-game-core PUBLIC
+    ${SDL_LIB_PATH}
+    ${SDL_IMAGE_LIB_PATH}
+    ${SDL_TTF_LIB_PATH}
+)
+
+target_link_libraries(sdl-game-core PUBLIC SDL3 SDL3_image SDL3_ttf)
+
+if(SHOW_DEBUG_LOGS)
+    target_compile_definitions(sdl-game-core PUBLIC DEBUG_LOGS=1)
+    if(TARGET ${PROJECT_NAME})
+        target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_LOGS=1)
+    endif()
+endif()

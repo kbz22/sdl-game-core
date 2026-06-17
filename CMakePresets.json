@@ -1,0 +1,44 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "debug-default",
+            "description": "Debug library build for editor integration",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_TOOLCHAIN_FILE": "",
+                "SHOW_DEBUG_LOGS": "ON"
+            }
+        },
+        {
+            "name": "release-default",
+            "description": "Release library build for editor integration",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_TOOLCHAIN_FILE": ""                
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Release",
+            "configurePreset": "release-default",
+            "targets": [
+                "sdl-game-core"
+            ]
+        },
+        {
+            "name": "Debug",
+            "configurePreset": "debug-default",
+            "targets": [
+                "sdl-game-core"
+            ]
+        }
+    ]
+}
