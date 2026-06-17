@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "sgc/messaging/message_queue.hpp"
+// #include "sgc/messaging/message_queue.hpp"
 #include "sgc/types.hpp"
 
 namespace sgc::sdl {

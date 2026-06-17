@@ -1,6 +1,6 @@
-#include "sdl/sdl.hpp"
+#include "sgc/sdl/sdl.hpp"
 
-#include "debug/log.hpp"
+#include "sgc/debug/log.hpp"
 
 #include <SDL3/SDL.h>
 
@@ -72,7 +72,7 @@ void sgc::sdl::Render(SDL_Renderer* renderer)
     SDL_RenderPresent(renderer);
 }
 
-void sgc::sdl::PollEvents(messaging::MessageQueue& messageQueue)
+/* void sgc::sdl::PollEvents(messaging::MessageQueue& messageQueue)
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -130,4 +130,4 @@ void sgc::sdl::PollEvents(messaging::MessageQueue& messageQueue)
                 break;
         }
     }
-}
+} */

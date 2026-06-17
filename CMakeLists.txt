@@ -46,6 +46,9 @@ add_library(sdl-game-core STATIC
     src/graphics/sprite.cpp
     src/graphics/tiled_static_layer.cpp
     src/graphics/tileset.cpp
+
+    src/sdl/sdl.cpp
+    src/sdl/sdl_win32.cpp
 )
 
 option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)

@@ -1,4 +1,4 @@
-#include "sdl/sdl_win32.hpp"
+#include "sgc/sdl/sdl_win32.hpp"
 
 #ifdef _MSVC_LANG
 
