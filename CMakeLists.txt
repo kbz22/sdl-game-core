@@ -41,11 +41,15 @@ endif()
 add_library(sdl-game-core STATIC
     src/debug/log.cpp
 
+    src/data/tilestorage.cpp
+
     src/graphics/image.cpp
     src/graphics/rectangle.cpp
     src/graphics/sprite.cpp
     src/graphics/tiled_static_layer.cpp
     src/graphics/tileset.cpp
+    src/graphics/tiledimage.cpp
+    src/graphics/tiledlayer.cpp
 
     src/sdl/sdl.cpp
     src/sdl/sdl_win32.cpp

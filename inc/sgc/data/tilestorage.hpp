@@ -3,9 +3,14 @@
 #include "sgc/types.hpp"
 
 #include <array>
+#include <optional>
 #include <unordered_map>
 
 namespace sgc::data {
+
+    using ChunkCoord = sgc::math::uvec2;
+    using GridCoord = sgc::math::uvec2;
+    using TileId = uint32_t;
 
     struct TileChunk {
         static constexpr sgc::math::u64 Size = 32;
@@ -16,11 +21,13 @@ namespace sgc::data {
     class TileContainer {
 
         private:
-            std::unordered_map<sgc::math::vec2, TileChunk> m_chunks;
+            std::unordered_map<ChunkCoord, TileChunk> m_chunks;
 
         public:
-            TileId GetTileAt(sgc::math::vec2 position) const;
-            void SetTileAt(sgc::math::vec2 position, TileId tileId);
+            std::optional<TileId> GetTileAt(GridCoord position) const;
+            void SetTileAt(GridCoord position, TileId tileId);
+
+            const TileChunk* GetChunk(ChunkCoord coord) const;
 
     };
 }

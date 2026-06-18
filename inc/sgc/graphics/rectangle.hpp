@@ -9,7 +9,6 @@ namespace sgc::graphics {
 
     class Rectangle : public IDrawable {
         private:            
-            SDL_Renderer *m_renderer = nullptr;
             SDL_Rect m_rect;
             int m_alpha = 255;
             graphics::color m_color{ 255, 255, 255, 255 };
@@ -26,10 +25,9 @@ namespace sgc::graphics {
             void SetPosition(math::vec2 position);
             void SetSize(math::uvec2 size);
             void SetAlpha(int alpha);
-            void SetColor(graphics::color color);
-        
-            void SetRenderer(SDL_Renderer *renderer);
-            void Draw();
+            void SetColor(graphics::color color);        
+            
+            void Draw(const RenderContext& context) override;
     };
 
 }

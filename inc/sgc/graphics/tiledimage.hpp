@@ -8,14 +8,12 @@ namespace sgc::graphics {
     class TiledImage : public IDrawable {
 
         private:
-            std::shared_ptr<TiledLayer> m_layer;
-            SDL_Renderer *m_renderer;
+            std::shared_ptr<TiledLayer> m_layer;            
 
         public:
-            TiledImage(std::shared_ptr<TiledLayer> layer);
+            TiledImage(std::shared_ptr<TiledLayer> layer, SDL_Renderer *renderer = nullptr);
 
-            void Draw() override;
-            void SetRenderer(SDL_Renderer *renderer) override;
+            void Draw(const RenderContext& context) override;            
 
     };
 

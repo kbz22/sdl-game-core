@@ -17,14 +17,9 @@ void sgc::graphics::TiledStaticLayer::SetPositionPx(sgc::math::vec2 position)
     m_position = position;
 }
 
-void sgc::graphics::TiledStaticLayer::SetRenderer(SDL_Renderer *renderer)
+void sgc::graphics::TiledStaticLayer::Draw(const RenderContext& context)
 {
-    m_renderer = renderer;
-}
-
-void sgc::graphics::TiledStaticLayer::Draw()
-{
-    if (!m_renderer) {
+    if (!context.renderer) {
         return;
     }
 
@@ -45,7 +40,7 @@ void sgc::graphics::TiledStaticLayer::Draw()
                 static_cast<float>(tileSize.x),
                 static_cast<float>(tileSize.y)
             };
-            SDL_RenderTexture(m_renderer, texture, &srcRect, &dstRect);
+            SDL_RenderTexture(context.renderer, texture, &srcRect, &dstRect);
         }
     }
 }

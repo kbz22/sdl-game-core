@@ -15,15 +15,9 @@ void sgc::graphics::Sprite::SetPositionPx(sgc::math::vec2 position)
 {
     m_position = position;
 }
-
-void sgc::graphics::Sprite::SetRenderer(SDL_Renderer *renderer)
-{
-    m_renderer = renderer;
-}
-
-void sgc::graphics::Sprite::Draw()
+void sgc::graphics::Sprite::Draw(const RenderContext& context)
 {    
-    if (!m_renderer) {
+    if (!context.renderer) {
         return;
     }
 
@@ -41,5 +35,5 @@ void sgc::graphics::Sprite::Draw()
 
     SDL_FRect srcRect = m_tileset->GetTileRect(m_gridPosition);
     
-    SDL_RenderTexture(m_renderer, texture, &srcRect, &dstRect);
+    SDL_RenderTexture(context.renderer, texture, &srcRect, &dstRect);
 }

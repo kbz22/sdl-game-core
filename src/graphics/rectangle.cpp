@@ -55,14 +55,9 @@ void sgc::graphics::Rectangle::SetColor(sgc::graphics::color color)
     m_color = color;
 }
 
-void sgc::graphics::Rectangle::SetRenderer(SDL_Renderer *renderer)
+void sgc::graphics::Rectangle::Draw(const RenderContext& context)
 {
-    m_renderer = renderer;
-}
-
-void sgc::graphics::Rectangle::Draw()
-{
-    if (!m_renderer) {
+    if (!context.renderer) {
         return;
     }
 
@@ -73,9 +68,9 @@ void sgc::graphics::Rectangle::Draw()
         static_cast<float>(m_rect.h)
     };
 
-    SDL_SetRenderDrawColor(m_renderer, m_color.r, m_color.g, m_color.b, m_alpha);
+    SDL_SetRenderDrawColor(context.renderer, m_color.r, m_color.g, m_color.b, m_alpha);
 
-    SDL_RenderRect(m_renderer, &dstRect);
+    SDL_RenderRect(context.renderer, &dstRect);
 }
 
     
