@@ -11,6 +11,8 @@ namespace sgc::graphics {
             std::shared_ptr<data::TileContainer> m_tileContainer;
 
         public:
+            TiledLayer(std::shared_ptr<Tileset> tileset, std::shared_ptr<data::TileContainer> tileContainer);
+
             Tileset& GetTileset() const;
             data::TileContainer& GetTileContainer() const;
             
