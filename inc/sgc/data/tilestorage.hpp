@@ -24,6 +24,8 @@ namespace sgc::data {
             std::unordered_map<ChunkCoord, TileChunk> m_chunks;
 
         public:
+            TileContainer() = default;
+
             std::optional<TileId> GetTileAt(GridCoord position) const;
             void SetTileAt(GridCoord position, TileId tileId);
 

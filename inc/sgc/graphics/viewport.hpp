@@ -5,8 +5,8 @@ namespace sgc::graphics {
     struct Viewport {
         float x;
         float y;
-        float width;
-        float height;
+        float w;
+        float h;
     };
 
     struct View {

@@ -11,7 +11,7 @@ namespace sgc::graphics {
             std::shared_ptr<TiledLayer> m_layer;            
 
         public:
-            TiledImage(std::shared_ptr<TiledLayer> layer, SDL_Renderer *renderer = nullptr);
+            TiledImage(std::shared_ptr<TiledLayer> layer);
 
             void Draw(const RenderContext& context) override;            
 

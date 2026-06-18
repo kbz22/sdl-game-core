@@ -1,6 +1,6 @@
 #include "sgc/graphics/tiledimage.hpp"
 
-sgc::graphics::TiledImage::TiledImage(std::shared_ptr<TiledLayer> layer, SDL_Renderer *renderer) :
+sgc::graphics::TiledImage::TiledImage(std::shared_ptr<TiledLayer> layer) :
     m_layer(layer)
 {
 }
