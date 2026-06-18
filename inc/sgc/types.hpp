@@ -19,6 +19,10 @@ namespace sgc::math {
 
 }
 
+namespace sgc::data {    
+    using TileId = uint32_t;
+}
+
 namespace sgc::graphics {
 
     struct color {
