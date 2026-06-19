@@ -8,12 +8,17 @@ sgc::graphics::Tileset::Tileset(sgc::graphics::Image &image, sgc::math::uvec2 ti
     m_gridSize.y = m_image->m_height / m_tileSize.y;
 }
 
-SDL_FRect sgc::graphics::Tileset::GetTileRect(sgc::math::uvec2 gridPosition)
+SDL_FRect sgc::graphics::Tileset::GetTileRect(tile::TileId id) const
 {
+    const sgc::math::uvec2 tilePosition{
+        id % m_gridSize.x,
+        id / m_gridSize.x
+    };
+
     SDL_FRect rect;
 
-    rect.x = static_cast<float>(gridPosition.x * m_tileSize.x);
-    rect.y = static_cast<float>(gridPosition.y * m_tileSize.y);
+    rect.x = static_cast<float>(tilePosition.x * m_tileSize.x);
+    rect.y = static_cast<float>(tilePosition.y * m_tileSize.y);
     rect.w = static_cast<float>(m_tileSize.x);
     rect.h = static_cast<float>(m_tileSize.y);
 
@@ -33,4 +38,9 @@ sgc::math::uvec2 sgc::graphics::Tileset::GetTileSize() const
 sgc::math::uvec2 sgc::graphics::Tileset::GetImageSize() const
 {
     return m_image->GetSize();
+}
+
+sgc::math::uvec2 sgc::graphics::Tileset::GetSizeInTiles() const
+{
+    return m_gridSize;
 }

@@ -1,14 +1,19 @@
 #include "sgc/graphics/sprite.hpp"
 
 sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, sgc::math::uvec2 gridPosition) :
-    m_tileset(std::move(tileset)),
-    m_gridPosition(gridPosition)
-{}
+    m_tileset(std::move(tileset))
+{
+    this->SetTilesetPosition(gridPosition);
+}
 
 void sgc::graphics::Sprite::SetTilesetPosition(sgc::math::uvec2 gridPosition)
 {
-    m_gridPosition.x = gridPosition.x;
-    m_gridPosition.y = gridPosition.y;
+    m_gridPosition = gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x;
+}
+
+void sgc::graphics::Sprite::SetTilesetPosition(tile::TileId tileId)
+{
+    m_gridPosition = tileId;
 }
 
 void sgc::graphics::Sprite::SetPositionPx(sgc::math::vec2 position)

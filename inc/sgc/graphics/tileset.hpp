@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 #include "sgc/graphics/image.hpp"
+#include "sgc/data/tilestorage.hpp"
 #include "sgc/types.hpp"
 
 namespace sgc::graphics {
@@ -18,10 +19,11 @@ namespace sgc::graphics {
         public:
             Tileset(Image& image, math::uvec2 tileSize);
             
-            SDL_FRect GetTileRect(math::uvec2 gridPosition);
+            SDL_FRect GetTileRect(tile::TileId tileId) const;
             SDL_Texture* GetTexture() const;            
             math::uvec2 GetTileSize() const;                       
             math::uvec2 GetImageSize() const;
+            math::uvec2 GetSizeInTiles() const;
 
             friend class Sprite;
 

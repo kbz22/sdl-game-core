@@ -33,7 +33,7 @@ void sgc::graphics::TiledStaticLayer::Draw(const RenderContext& context)
     for (uint64_t row = 0; row < m_size.y; ++row) {
         for (uint64_t col = 0; col < m_size.x; ++col) {
             const sgc::math::uvec2 tilePos = m_tilePositions[row * m_size.x + col];
-            const SDL_FRect srcRect = m_tileset->GetTileRect(tilePos);
+            const SDL_FRect srcRect = m_tileset->GetTileRect(row * m_size.x + col);
             const SDL_FRect dstRect = {
                 static_cast<float>(m_position.x + static_cast<int64_t>(col * tileSize.x)),
                 static_cast<float>(m_position.y + static_cast<int64_t>(row * tileSize.y)),

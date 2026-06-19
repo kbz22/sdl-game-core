@@ -53,6 +53,10 @@ namespace std
     };
 }
 
+namespace sgc::tile {
+    using TileId = uint32_t;
+}
+
 namespace sgc::graphics {
 
     struct color {

@@ -17,21 +17,24 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     SDL_SetTextureBlendMode(tileset.GetTexture(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(tileset.GetTexture(), 255);
 
+    const sgc::math::uvec2 size_xy = tileset.GetSizeInTiles();
     const sgc::math::uvec2 tileSize = tileset.GetTileSize();
 
-    auto size_x = context.view.camera.w / tileSize.x;
-    auto size_y = context.view.camera.h / tileSize.y;
+    auto size_x = context.view.camera.w / size_xy.x;
+    auto size_y = context.view.camera.h / size_xy.y;
 
     for (auto y = 0; y < size_y; ++y) {
         for (auto x = 0; x < size_x; ++x) {
+            
             sgc::math::uvec2 gridPos{ static_cast<sgc::math::u64>(x), static_cast<sgc::math::u64>(y) };
+
             auto tileIdOpt = tileContainer.GetTileAt(gridPos);
+
             if (!tileIdOpt.has_value()) {
                 continue;
             }
-
-            sgc::math::uvec2 tilePos{ tileIdOpt.value() % tileset.GetImageSize().x, tileIdOpt.value() / tileset.GetImageSize().x };
-            SDL_FRect srcRect = tileset.GetTileRect(tilePos);
+            
+            SDL_FRect srcRect = tileset.GetTileRect(tileIdOpt.value());
             SDL_FRect dstRect = {
                 static_cast<float>(context.view.camera.x + x * tileSize.x),
                 static_cast<float>(context.view.camera.y + y * tileSize.y),

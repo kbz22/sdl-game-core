@@ -1,6 +1,6 @@
 #include "sgc/data/tilestorage.hpp"
 
-std::optional<sgc::data::TileId> sgc::data::TileContainer::GetTileAt(sgc::math::uvec2 position) const
+std::optional<sgc::tile::TileId> sgc::data::TileContainer::GetTileAt(sgc::math::uvec2 position) const
 {
     sgc::math::uvec2 chunkPos;
     chunkPos.x = position.x / TileChunk::Size;
@@ -19,7 +19,7 @@ std::optional<sgc::data::TileId> sgc::data::TileContainer::GetTileAt(sgc::math::
     return chunk.tiles[localY * TileChunk::Size + localX];
 }
 
-void sgc::data::TileContainer::SetTileAt(sgc::math::uvec2 position, TileId tileId)
+void sgc::data::TileContainer::SetTileAt(sgc::math::uvec2 position, sgc::tile::TileId tileId)
 {
     sgc::math::uvec2 chunkPos;
     chunkPos.x = position.x / TileChunk::Size;
