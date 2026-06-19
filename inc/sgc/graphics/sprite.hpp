@@ -2,6 +2,7 @@
 
 #include "sgc/graphics/image.hpp"
 #include "sgc/graphics/idrawable.hpp"
+#include "sgc/graphics/rendercontext.hpp"
 #include "sgc/graphics/tileset.hpp"
 #include "sgc/types.hpp"
 

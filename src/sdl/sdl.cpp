@@ -53,23 +53,23 @@ void sgc::sdl::DestroyWindow(SDL_Window* window)
     }
 }
 
-void sgc::sdl::Clear(SDL_Renderer* renderer, sgc::graphics::color color)
+void sgc::sdl::Clear(graphics::RenderContext const& context, sgc::graphics::color color)
 {
-    if (!renderer) {
+    if (!context.renderer) {
         return;
     }
 
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(context.renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderClear(context.renderer);
 }
 
-void sgc::sdl::Render(SDL_Renderer* renderer)
+void sgc::sdl::Render(graphics::RenderContext const& context)
 {
-    if (!renderer) {
+    if (!context.renderer) {
         return;
     }
 
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(context.renderer);
 }
 
 /* void sgc::sdl::PollEvents(messaging::MessageQueue& messageQueue)

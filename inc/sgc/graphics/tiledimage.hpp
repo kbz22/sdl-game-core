@@ -1,7 +1,10 @@
 #pragma once
 
 #include "sgc/graphics/tiledlayer.hpp"
+#include "sgc/graphics/rendercontext.hpp"
 #include "sgc/graphics/idrawable.hpp"
+
+#include <memory>
 
 namespace sgc::graphics {
 

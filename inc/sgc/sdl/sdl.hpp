@@ -4,6 +4,7 @@
 
 // #include "sgc/messaging/message_queue.hpp"
 #include "sgc/types.hpp"
+#include "sgc/graphics/rendercontext.hpp"
 
 namespace sgc::sdl {
 
@@ -19,9 +20,9 @@ namespace sgc::sdl {
 
     void DestroyWindow(SDL_Window* window);
 
-    void Clear(SDL_Renderer* renderer, graphics::color color);
+    void Clear(graphics::RenderContext const& context, graphics::color color);
 
-    void Render(SDL_Renderer* renderer);    
+    void Render(graphics::RenderContext const& context);    
 
     // void PollEvents(messaging::MessageQueue& messageQueue);
 

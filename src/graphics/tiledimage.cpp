@@ -19,5 +19,27 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
 
     const sgc::math::uvec2 tileSize = tileset.GetTileSize();
 
-    
+    auto size_x = context.view.camera.w / tileSize.x;
+    auto size_y = context.view.camera.h / tileSize.y;
+
+    for (auto y = 0; y < size_y; ++y) {
+        for (auto x = 0; x < size_x; ++x) {
+            sgc::math::uvec2 gridPos{ static_cast<sgc::math::u64>(x), static_cast<sgc::math::u64>(y) };
+            auto tileIdOpt = tileContainer.GetTileAt(gridPos);
+            if (!tileIdOpt.has_value()) {
+                continue;
+            }
+
+            sgc::math::uvec2 tilePos{ tileIdOpt.value() % tileset.GetImageSize().x, tileIdOpt.value() / tileset.GetImageSize().x };
+            SDL_FRect srcRect = tileset.GetTileRect(tilePos);
+            SDL_FRect dstRect = {
+                static_cast<float>(context.view.camera.x + x * tileSize.x),
+                static_cast<float>(context.view.camera.y + y * tileSize.y),
+                static_cast<float>(tileSize.x),
+                static_cast<float>(tileSize.y)
+            };
+
+            SDL_RenderTexture(context.renderer, tileset.GetTexture(), &srcRect, &dstRect);
+        }
+    }
 }

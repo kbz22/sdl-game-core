@@ -1,17 +1,9 @@
 #pragma once
 
-#include <SDL3/SDL.h>
-#include <memory>
-
-#include "sgc/graphics/viewport.hpp"
-
 namespace sgc::graphics {
 
-    struct RenderContext {
-        SDL_Renderer* renderer;
-        View view;
-    };
-
+    struct RenderContext;
+    
     class IDrawable {
         public:
             virtual ~IDrawable() = default;
