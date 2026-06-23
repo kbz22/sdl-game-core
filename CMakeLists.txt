@@ -41,7 +41,8 @@ endif()
 add_library(sdl-game-core STATIC
     src/debug/log.cpp
 
-    src/data/tilestorage.cpp
+    src/data/chunkedtilestorage.cpp
+    src/data/statictilestorage.cpp
 
     src/graphics/image.cpp
     src/graphics/rectangle.cpp

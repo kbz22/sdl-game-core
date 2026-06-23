@@ -2,7 +2,6 @@
 
 #include <SDL3/SDL.h>
 #include "sgc/graphics/image.hpp"
-#include "sgc/data/tilestorage.hpp"
 #include "sgc/types.hpp"
 
 namespace sgc::graphics {

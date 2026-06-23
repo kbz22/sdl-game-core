@@ -12,7 +12,7 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     }
 
     auto& tileset = m_layer->GetTileset();
-    auto& tileContainer = m_layer->GetTileContainer();
+    auto& tileStorage = m_layer->GetTileStorage();
 
     SDL_SetTextureBlendMode(tileset.GetTexture(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(tileset.GetTexture(), 255);
@@ -28,7 +28,7 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
             
             sgc::math::uvec2 gridPos{ static_cast<sgc::math::u64>(x), static_cast<sgc::math::u64>(y) };
 
-            auto tileIdOpt = tileContainer.GetTileAt(gridPos);
+            auto tileIdOpt = tileStorage.GetTileAt(gridPos);
 
             if (!tileIdOpt.has_value()) {
                 continue;

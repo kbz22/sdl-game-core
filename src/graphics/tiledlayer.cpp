@@ -1,8 +1,8 @@
 #include "sgc/graphics/tiledlayer.hpp"
 
-sgc::graphics::TiledLayer::TiledLayer(std::shared_ptr<Tileset> tileset, std::shared_ptr<data::TileContainer> tileContainer) :
+sgc::graphics::TiledLayer::TiledLayer(std::shared_ptr<Tileset> tileset, std::shared_ptr<data::ITileStorage> tileStorage) :
     m_tileset(tileset),
-    m_tileContainer(tileContainer)
+    m_tileStorage(tileStorage)
 {}
 
 sgc::graphics::Tileset& sgc::graphics::TiledLayer::GetTileset() const
@@ -10,7 +10,7 @@ sgc::graphics::Tileset& sgc::graphics::TiledLayer::GetTileset() const
     return *m_tileset;
 }
 
-sgc::data::TileContainer& sgc::graphics::TiledLayer::GetTileContainer() const
+sgc::data::ITileStorage& sgc::graphics::TiledLayer::GetTileStorage() const
 {
-    return *m_tileContainer;
+    return *m_tileStorage;
 }
