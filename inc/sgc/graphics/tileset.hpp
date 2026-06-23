@@ -25,6 +25,10 @@ namespace sgc::graphics {
             math::uvec2 GetImageSize() const;
             math::uvec2 GetSizeInTiles() const;
 
+            tile::TileId ToTileId(math::uvec2 position) const;
+            tile::TileId ToTileId(math::vec2 position) const;
+            tile::TileId ToTileId(math::u64 x, math::u64 y) const;
+
             friend class Sprite;
 
     };

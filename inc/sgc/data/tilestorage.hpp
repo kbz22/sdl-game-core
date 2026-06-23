@@ -9,7 +9,7 @@
 namespace sgc::data {
 
     using ChunkCoord = sgc::math::uvec2;
-    using GridCoord = sgc::math::uvec2;    
+    using GridCoord = sgc::math::uvec2;   
 
     struct TileChunk {
         static constexpr sgc::math::u64 Size = 32;
