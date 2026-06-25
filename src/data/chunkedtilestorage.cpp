@@ -32,3 +32,14 @@ void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, sgc::tile::Til
 
     chunk.tiles[localY * TileChunk::Size + localX] = tileId;
 }
+
+void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, sgc::tile::TileId tileId)
+{
+    TileChunk& chunk = m_chunks[chunkPosition]; // This will create a new chunk if it doesn't exist
+
+    for (sgc::math::u64 y = 0; y < TileChunk::Size; ++y) {
+        for (sgc::math::u64 x = 0; x < TileChunk::Size; ++x) {
+            chunk.tiles[y * TileChunk::Size + x] = tileId;
+        }
+    }
+}
