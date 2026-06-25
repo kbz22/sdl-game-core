@@ -43,3 +43,8 @@ void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, sgc::ti
         }
     }
 }
+
+void sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
+{
+    m_chunks.erase(chunkPosition);
+}
