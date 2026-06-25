@@ -10,13 +10,13 @@ namespace sgc::graphics {
 
     class Rectangle : public IDrawable {
         private:            
-            SDL_Rect m_rect;
+            SDL_FRect m_rect;
             int m_alpha = 255;
             graphics::color m_color{ 255, 255, 255, 255 };
 
         public:
             Rectangle(int x, int y, int width, int height);
-            Rectangle(math::vec2 position, math::uvec2 size);
+            Rectangle(math::vec2 position, math::uvec2 size);            
 
             math::vec2 GetPosition() const;
             math::uvec2 GetSize() const;
