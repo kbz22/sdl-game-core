@@ -10,8 +10,7 @@ namespace sgc::graphics {
 
     class Rectangle : public IDrawable {
         private:            
-            SDL_FRect m_rect;
-            int m_alpha = 255;
+            SDL_FRect m_rect;            
             graphics::color m_color{ 255, 255, 255, 255 };
 
         public:

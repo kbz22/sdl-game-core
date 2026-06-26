@@ -36,7 +36,7 @@ sgc::math::uvec2 sgc::graphics::Rectangle::GetSize() const
 
 int sgc::graphics::Rectangle::GetAlpha() const
 {
-    return m_alpha;
+    return m_color.a;
 }
 
 sgc::graphics::color sgc::graphics::Rectangle::GetColor() const
@@ -58,7 +58,7 @@ void sgc::graphics::Rectangle::SetSize(sgc::math::uvec2 size)
 
 void sgc::graphics::Rectangle::SetAlpha(int alpha)
 {
-    m_alpha = alpha;
+    m_color.a = alpha;
 }
 
 void sgc::graphics::Rectangle::SetColor(sgc::graphics::color color)
@@ -72,7 +72,7 @@ void sgc::graphics::Rectangle::Draw(const RenderContext& context)
         return;
     }
 
-    SDL_SetRenderDrawColor(context.renderer, m_color.r, m_color.g, m_color.b, m_alpha);
+    SDL_SetRenderDrawColor(context.renderer, m_color.r, m_color.g, m_color.b, m_color.a);
 
     SDL_RenderRect(context.renderer, &m_rect);
 }
