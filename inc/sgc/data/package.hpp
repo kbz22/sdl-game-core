@@ -13,7 +13,8 @@ namespace sgc::data {
         char magic[4];
         uint32_t version;
         uint32_t assetCount;
-        uint32_t assetTableOffset;
+        uint32_t tableOffset;
+        uint32_t dataOffset;
     };
 
     struct PackageEntry {
@@ -25,20 +26,23 @@ namespace sgc::data {
 
     class Package {
 
-        private:
-            std::ifstream m_stream;
-            std::unordered_map<AssetId, PackageEntry> m_entries;
+    private:
+        mutable std::ifstream m_stream;
+        std::unordered_map<AssetId, PackageEntry> m_entries;
+        uint32_t m_dataOffset = 0;
+        size_t m_fileSize = 0;
+            
+    public:
+        bool Open(const std::filesystem::path& path);
+        bool Save(const std::filesystem::path& path); // optional for now
 
-        public:
-            Package() = default;
+        bool HasAsset(AssetId id) const;
 
-            bool Open(const std::filesystem::path& path);
-            bool HasAsset(AssetId id) const;
-            const PackageEntry& GetAssetEntry(AssetId id) const;
+        const PackageEntry& GetEntry(AssetId id) const;
 
-            std::vector<uint8_t> ReadAssetData(AssetId id) const;
+        std::vector<uint8_t> ReadAssetData(AssetId id) const;
 
-
+    
     };
 
 }

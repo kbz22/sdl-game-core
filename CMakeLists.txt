@@ -43,6 +43,9 @@ add_library(sdl-game-core STATIC
 
     src/data/chunkedtilestorage.cpp
     src/data/statictilestorage.cpp
+    src/data/helpers.cpp
+    src/data/package.cpp
+    src/data/packagebuilder.cpp
 
     src/graphics/image.cpp
     src/graphics/rectangle.cpp

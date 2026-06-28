@@ -4,6 +4,7 @@
 
 #include <SDL3/SDL.h>
 #include <memory>
+#include <vector>
 #include <filesystem>
 
 namespace sgc::graphics {
@@ -21,6 +22,7 @@ namespace sgc::graphics {
             Image() = default;
             math::uvec2 GetSize() const;
             bool LoadTexture(SDL_Renderer* renderer, std::filesystem::path path);
+            bool LoadTexture(SDL_Renderer* renderer, std::vector<uint8_t> data);
 
         private:                        
             math::u64 m_width = 0;
