@@ -7,7 +7,7 @@ void sgc::data::ResourceManager::Mount(Package* package)
     m_package = package;
 }
 
-sgc::graphics::Image& sgc::data::ResourceManager::LoadImage(ResourceContext& context, AssetId id)
+std::shared_ptr<sgc::graphics::Image> sgc::data::ResourceManager::LoadImage(ResourceContext& context, AssetId id)
 {
     auto it = m_images.find(id);
 
@@ -30,9 +30,9 @@ sgc::graphics::Image& sgc::data::ResourceManager::LoadImage(ResourceContext& con
 
     const auto data = m_package->ReadAssetData(id);
 
-    sgc::graphics::Image image;
-    image.LoadTexture(context.renderer, data);
-    m_images[id] = std::move(image);
+    auto image = std::make_shared<sgc::graphics::Image>();
+    image->LoadTexture(context.renderer, data);
+    m_images[id] = image;
 
     return m_images.at(id);
 }

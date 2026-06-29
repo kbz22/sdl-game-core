@@ -16,11 +16,11 @@ namespace sgc::data {
 
         private:
             Package* m_package = nullptr;
-            std::unordered_map<AssetId, sgc::graphics::Image> m_images;
+            std::unordered_map<AssetId, std::shared_ptr<sgc::graphics::Image>> m_images;
 
         public:        
             void Mount(Package* package);
-            sgc::graphics::Image& LoadImage(ResourceContext& context, AssetId id);
+            std::shared_ptr<sgc::graphics::Image> LoadImage(ResourceContext& context, AssetId id);
 
     
     };

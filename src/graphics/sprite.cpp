@@ -1,7 +1,7 @@
 #include "sgc/graphics/sprite.hpp"
 
 sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, sgc::math::uvec2 gridPosition) :
-    m_tileset(std::move(tileset))
+    m_tileset(tileset)
 {
     this->SetTilesetPosition(gridPosition);
 }

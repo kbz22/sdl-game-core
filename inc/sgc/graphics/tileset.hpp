@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include <memory>
 #include "sgc/graphics/image.hpp"
 #include "sgc/types.hpp"
 
@@ -16,7 +17,7 @@ namespace sgc::graphics {
             math::uvec2 m_tileSize{ 0, 0 }; // in pixels            
 
         public:
-            Tileset(Image& image, math::uvec2 tileSize);
+            Tileset(std::shared_ptr<Image> image, math::uvec2 tileSize);
             
             SDL_FRect GetTileRect(tile::TileId tileId) const;
             SDL_Texture* GetTexture() const;            

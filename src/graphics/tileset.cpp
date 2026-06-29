@@ -1,7 +1,8 @@
 #include "sgc/graphics/tileset.hpp"
+#include <memory>
 
-sgc::graphics::Tileset::Tileset(sgc::graphics::Image &image, sgc::math::uvec2 tileSize) :
-    m_image(std::make_shared<Image>(std::move(image))),
+sgc::graphics::Tileset::Tileset(std::shared_ptr<Image> image, sgc::math::uvec2 tileSize) :
+    m_image(image),
     m_tileSize(tileSize)
 {    
     m_gridSize.x = m_image->m_width / m_tileSize.x;
