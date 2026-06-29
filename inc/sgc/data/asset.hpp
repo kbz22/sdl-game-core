@@ -10,9 +10,9 @@ namespace sgc::data {
 
         Unknown = 0,
 
-        MapType,
-        TilesetType,
-        ImageType,
+        Map,
+        Tileset,
+        Texture,
 
         Count
     };

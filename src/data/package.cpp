@@ -59,3 +59,17 @@ std::vector<uint8_t> sgc::data::Package::ReadAssetData(AssetId id) const
 
     return data;
 }
+
+bool sgc::data::Package::HasAsset(AssetId id) const
+{
+    return m_entries.find(id) != m_entries.end();
+}
+
+const sgc::data::PackageEntry& sgc::data::Package::GetEntry(AssetId id) const
+{
+    auto it = m_entries.find(id);
+    if (it == m_entries.end())
+        throw std::runtime_error("Asset not found in package");
+
+    return it->second;
+}
