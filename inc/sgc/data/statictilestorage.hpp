@@ -9,10 +9,10 @@ namespace sgc::data {
 
         private:
             std::vector<tile::TileId> m_tiles;
-            GridCoord m_size;
+            GridSize m_size;
 
         public:
-            StaticTileStorage(GridCoord size);
+            StaticTileStorage(GridSize size);
 
             virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const override;
             virtual void SetTileAt(GridCoord position, tile::TileId tileId) override;
