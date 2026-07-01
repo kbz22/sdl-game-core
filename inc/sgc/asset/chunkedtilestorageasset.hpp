@@ -1,13 +1,15 @@
 #pragma once
 
 #include "sgc/data/asset.hpp"
+#include "sgc/data/chunkedtilestorage.hpp"
 
 namespace sgc::asset {
 
-    struct ChunkedTileStorageAsset
-    {
-        sgc::data::AssetId tilesetId;
-        sgc::math::uvec2 chunkSize;
+    using ChunkedTileStorageSize = size_t;
+
+    struct ChunkAsset {
+        data::ChunkCoord position;
+        data::TileChunk chunk;
     };
 
 }

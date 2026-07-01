@@ -9,8 +9,8 @@
 
 namespace sgc::data {
 
-    using ChunkCoord = math::uvec2;
-    using GridCoord = tile::TilePosition2D;       
+    using ChunkCoord = math::vec2;
+    using GridCoord = tile::TilePosition2D;
 
     class ITileStorage {
         public:

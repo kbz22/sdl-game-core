@@ -43,6 +43,7 @@ add_library(sdl-game-core STATIC
 
     src/asset/tilesetloader.cpp
     src/asset/imageloader.cpp
+    src/asset/chunkedtilestorageloader.cpp
 
     src/data/chunkedtilestorage.cpp
     src/data/statictilestorage.cpp

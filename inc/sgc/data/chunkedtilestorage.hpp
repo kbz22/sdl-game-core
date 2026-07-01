@@ -20,6 +20,7 @@ namespace sgc::data {
             virtual void SetTileAt(GridCoord position, tile::TileId tileId) override;
 
             void SetChunkAt(ChunkCoord chunkPosition, tile::TileId tileId);
+            void SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk);
             void RemoveChunkAt(ChunkCoord chunkPosition);
             
     };

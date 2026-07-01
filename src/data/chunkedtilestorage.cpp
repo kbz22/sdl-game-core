@@ -2,7 +2,7 @@
 
 std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCoord position) const
 {
-    sgc::math::uvec2 chunkPos;
+    sgc::data::ChunkCoord chunkPos;
     chunkPos.x = position.x / TileChunk::Size;
     chunkPos.y = position.y / TileChunk::Size;
 
@@ -21,7 +21,7 @@ std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCo
 
 void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, sgc::tile::TileId tileId)
 {
-    sgc::math::uvec2 chunkPos;
+    sgc::data::ChunkCoord chunkPos;
     chunkPos.x = position.x / TileChunk::Size;
     chunkPos.y = position.y / TileChunk::Size;
 
@@ -42,6 +42,11 @@ void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, sgc::ti
             chunk.tiles[y * TileChunk::Size + x] = tileId;
         }
     }
+}
+
+void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk)
+{
+    m_chunks[chunkPosition] = chunk;
 }
 
 void sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
