@@ -16,15 +16,15 @@ namespace sgc::graphics {
 
         public:
             Rectangle(int x, int y, int width, int height);
-            Rectangle(math::vec2 position, math::uvec2 size);            
+            Rectangle(PixelPosition2D position, PixelSize2D size);            
 
-            math::vec2 GetPosition() const;
-            math::uvec2 GetSize() const;
+            PixelPosition2D GetPosition() const;
+            PixelSize2D GetSize() const;
             int GetAlpha() const;
             graphics::color GetColor() const;
 
-            void SetPosition(math::vec2 position);
-            void SetSize(math::uvec2 size);
+            void SetPosition(PixelPosition2D position);
+            void SetSize(PixelSize2D size);
             void SetAlpha(int alpha);
             void SetColor(graphics::color color);        
             

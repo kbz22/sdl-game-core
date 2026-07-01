@@ -4,7 +4,7 @@
 #include <memory>
 #include "sgc/graphics/image.hpp"
 #include "sgc/math/vector.hpp"
-#include "sgc/data/tileid.hpp"
+#include "sgc/tile/tile.hpp"
 
 namespace sgc::graphics {
 
@@ -14,21 +14,21 @@ namespace sgc::graphics {
 
         private:
             std::shared_ptr<Image> m_image;
-            math::uvec2 m_gridSize{ 0, 0 }; //in tiles            
-            math::uvec2 m_tileSize{ 0, 0 }; // in pixels            
+            tile::TileSize2D m_gridSize{ 0, 0 };
+            graphics::PixelSize2D m_tileSize{ 0, 0 };
 
         public:
-            Tileset(std::shared_ptr<Image> image, math::uvec2 tileSize);
+            Tileset(std::shared_ptr<Image> image, graphics::PixelSize2D tileSize);
             
-            SDL_FRect GetTileRect(data::TileId tileId) const;
+            SDL_FRect GetTileRect(tile::TileId tileId) const;
             SDL_Texture* GetTexture() const;            
-            math::uvec2 GetTileSize() const;                       
-            math::uvec2 GetImageSize() const;
-            math::uvec2 GetSizeInTiles() const;
+            graphics::PixelSize2D GetTileSize() const;                       
+            graphics::PixelSize2D GetImageSize() const;
+            tile::TileSize2D GetSizeInTiles() const;
 
-            data::TileId ToTileId(math::uvec2 position) const;
-            data::TileId ToTileId(math::vec2 position) const;
-            data::TileId ToTileId(math::u64 x, math::u64 y) const;
+            tile::TileId ToTileId(tile::TilesetPosition2D position) const;
+            tile::TileId ToTileId(tile::TilePosition2D position) const;
+            tile::TileId ToTileId(math::uval x, math::uval y) const;
 
             friend class Sprite;
 

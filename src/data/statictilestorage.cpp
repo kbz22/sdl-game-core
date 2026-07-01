@@ -5,7 +5,7 @@ sgc::data::StaticTileStorage::StaticTileStorage(GridCoord size) : m_size(size)
     m_tiles.resize(size.x * size.y, 0);
 }
 
-std::optional<sgc::data::TileId> sgc::data::StaticTileStorage::GetTileAt(GridCoord position) const
+std::optional<sgc::tile::TileId> sgc::data::StaticTileStorage::GetTileAt(GridCoord position) const
 {
     if (position.x >= m_size.x || position.y >= m_size.y) {
         return std::nullopt;
@@ -14,7 +14,7 @@ std::optional<sgc::data::TileId> sgc::data::StaticTileStorage::GetTileAt(GridCoo
     return m_tiles[position.y * m_size.x + position.x];
 }
 
-void sgc::data::StaticTileStorage::SetTileAt(GridCoord position, sgc::data::TileId tileId) 
+void sgc::data::StaticTileStorage::SetTileAt(GridCoord position, sgc::tile::TileId tileId) 
 {
     if (position.x >= m_size.x || position.y >= m_size.y) {
         return;

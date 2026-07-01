@@ -1,22 +1,22 @@
 #include "sgc/graphics/sprite.hpp"
 
-sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, sgc::math::uvec2 gridPosition) :
+sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, tile::TilesetPosition2D gridPosition) :
     m_tileset(tileset)
 {
     this->SetTilesetPosition(gridPosition);
 }
 
-void sgc::graphics::Sprite::SetTilesetPosition(sgc::math::uvec2 gridPosition)
+void sgc::graphics::Sprite::SetTilesetPosition(tile::TilesetPosition2D gridPosition)
 {
-    m_gridPosition = gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x;
+    m_tilesetPosition = static_cast<tile::TileId>(gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x);
 }
 
-void sgc::graphics::Sprite::SetTilesetPosition(data::TileId tileId)
+void sgc::graphics::Sprite::SetTilesetPosition(tile::TileId tileId)
 {
-    m_gridPosition = tileId;
+    m_tilesetPosition = tileId;
 }
 
-void sgc::graphics::Sprite::SetPositionPx(sgc::math::vec2 position)
+void sgc::graphics::Sprite::SetPositionPx(sgc::graphics::PixelPosition2D position)
 {
     m_position = position;
 }
@@ -38,7 +38,7 @@ void sgc::graphics::Sprite::Draw(const RenderContext& context)
         static_cast<float>(m_tileset->m_tileSize.y)
     };
 
-    SDL_FRect srcRect = m_tileset->GetTileRect(m_gridPosition);
+    SDL_FRect srcRect = m_tileset->GetTileRect(m_tilesetPosition);
     
     SDL_RenderTexture(context.renderer, texture, &srcRect, &dstRect);
 }

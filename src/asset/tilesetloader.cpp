@@ -13,8 +13,8 @@ std::shared_ptr<sgc::graphics::Tileset> sgc::asset::AssetLoader<sgc::graphics::T
 
     sgc::asset::TilesetAsset asset;
     asset.imageId = reader.Read<sgc::data::AssetId>();
-    asset.tileSize.x = reader.Read<sgc::math::u64>();
-    asset.tileSize.y = reader.Read<sgc::math::u64>();
+    asset.tileSize.x = reader.Read<sgc::math::uval>();
+    asset.tileSize.y = reader.Read<sgc::math::uval>();
 
     return std::make_shared<sgc::graphics::Tileset>(
         rm.LoadResource<sgc::graphics::Image>(asset.imageId, context),

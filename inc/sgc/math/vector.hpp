@@ -5,12 +5,12 @@
 
 namespace sgc::math {
 
-    using i64 = int64_t;
-    using u64 = uint64_t;
+    using ival = int64_t;
+    using uval = uint64_t;
 
     struct vec2 {
-        i64 x;
-        i64 y;
+        ival x;
+        ival y;
 
         bool operator==(const vec2& other) const noexcept
         {
@@ -19,8 +19,8 @@ namespace sgc::math {
     };
 
     struct uvec2 {
-        u64 x;
-        u64 y;
+        uval x;
+        uval y;
 
         bool operator==(const uvec2& other) const noexcept
         {
@@ -37,8 +37,8 @@ namespace std
     {
         size_t operator()(const sgc::math::uvec2& v) const noexcept
         {
-            return std::hash<sgc::math::u64>{}(v.x)
-                 ^ (std::hash<sgc::math::u64>{}(v.y) << 1);
+            return std::hash<sgc::math::uval>{}(v.x)
+                 ^ (std::hash<sgc::math::uval>{}(v.y) << 1);
         }
     };
 
@@ -47,8 +47,8 @@ namespace std
     {
         size_t operator()(const sgc::math::vec2& v) const noexcept
         {
-            return std::hash<sgc::math::i64>{}(v.x)
-                 ^ (std::hash<sgc::math::i64>{}(v.y) << 1);
+            return std::hash<sgc::math::ival>{}(v.x)
+                 ^ (std::hash<sgc::math::ival>{}(v.y) << 1);
         }
     };
 }

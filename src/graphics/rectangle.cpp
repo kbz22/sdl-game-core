@@ -9,7 +9,7 @@ sgc::graphics::Rectangle::Rectangle(int x, int y, int width, int height) :
     }
 {}
 
-sgc::graphics::Rectangle::Rectangle(sgc::math::vec2 position, sgc::math::uvec2 size) :
+sgc::graphics::Rectangle::Rectangle(sgc::graphics::PixelPosition2D position, sgc::graphics::PixelSize2D size) :
     m_rect{
         static_cast<float>(position.x),
         static_cast<float>(position.y),
@@ -18,19 +18,19 @@ sgc::graphics::Rectangle::Rectangle(sgc::math::vec2 position, sgc::math::uvec2 s
     }    
 {}
 
-sgc::math::vec2 sgc::graphics::Rectangle::GetPosition() const
+sgc::graphics::PixelPosition2D sgc::graphics::Rectangle::GetPosition() const
 {
-    return sgc::math::vec2{
-        static_cast<sgc::math::i64>(m_rect.x),
-        static_cast<sgc::math::i64>(m_rect.y)
+    return sgc::graphics::PixelPosition2D{
+        static_cast<sgc::math::ival>(m_rect.x),
+        static_cast<sgc::math::ival>(m_rect.y)
     };
 }
 
-sgc::math::uvec2 sgc::graphics::Rectangle::GetSize() const
+sgc::graphics::PixelSize2D sgc::graphics::Rectangle::GetSize() const
 {
-    return sgc::math::uvec2{
-        static_cast<sgc::math::u64>(m_rect.w),
-        static_cast<sgc::math::u64>(m_rect.h)
+    return sgc::graphics::PixelSize2D{
+        static_cast<sgc::math::uval>(m_rect.w),
+        static_cast<sgc::math::uval>(m_rect.h)
     };
 }
 
@@ -44,13 +44,13 @@ sgc::graphics::color sgc::graphics::Rectangle::GetColor() const
     return m_color;
 }
 
-void sgc::graphics::Rectangle::SetPosition(sgc::math::vec2 position)
+void sgc::graphics::Rectangle::SetPosition(sgc::graphics::PixelPosition2D position)
 {
     m_rect.x = static_cast<float>(position.x);
     m_rect.y = static_cast<float>(position.y);
 }
 
-void sgc::graphics::Rectangle::SetSize(sgc::math::uvec2 size)
+void sgc::graphics::Rectangle::SetSize(sgc::graphics::PixelSize2D size)
 {
     m_rect.w = static_cast<float>(size.x);
     m_rect.h = static_cast<float>(size.y);

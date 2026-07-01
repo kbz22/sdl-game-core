@@ -1,7 +1,7 @@
 #pragma once
 
 #include "sgc/math/vector.hpp"
-#include "sgc/data/tileid.hpp"
+#include "sgc/tile/tile.hpp"
 
 #include <array>
 #include <optional>
@@ -9,14 +9,14 @@
 
 namespace sgc::data {
 
-    using ChunkCoord = sgc::math::uvec2;
-    using GridCoord = sgc::math::uvec2;       
+    using ChunkCoord = math::uvec2;
+    using GridCoord = tile::TilePosition2D;       
 
     class ITileStorage {
         public:
             virtual ~ITileStorage() = default;
 
-            virtual std::optional<data::TileId> GetTileAt(GridCoord position) const = 0;
-            virtual void SetTileAt(GridCoord position, data::TileId tileId) = 0;            
+            virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const = 0;
+            virtual void SetTileAt(GridCoord position, tile::TileId tileId) = 0;            
     };
 }

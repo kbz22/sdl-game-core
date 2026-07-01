@@ -53,8 +53,7 @@ add_library(sdl-game-core STATIC
 
     src/graphics/image.cpp
     src/graphics/rectangle.cpp
-    src/graphics/sprite.cpp
-    src/graphics/tiled_static_layer.cpp
+    src/graphics/sprite.cpp    
     src/graphics/tileset.cpp
     src/graphics/tiledimage.cpp
     src/graphics/tiledlayer.cpp

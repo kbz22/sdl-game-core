@@ -9,6 +9,10 @@
 
 namespace sgc::graphics {
 
+    using PixelSize2D = math::uvec2;
+    using PixelPosition2D = math::vec2;
+    using PixelCount = math::uval;
+
     class Tileset;
 
     struct TextureDeleter {
@@ -20,13 +24,13 @@ namespace sgc::graphics {
     class Image {
         public: 
             Image() = default;
-            math::uvec2 GetSize() const;
+            PixelSize2D GetSize() const;
             bool LoadTexture(SDL_Renderer* renderer, std::filesystem::path path);
             bool LoadTexture(SDL_Renderer* renderer, std::vector<uint8_t> data);
 
         private:                        
-            math::u64 m_width = 0;
-            math::u64 m_height = 0;            
+            PixelCount m_width = 0;
+            PixelCount m_height = 0;            
             TexturePtr m_texture = nullptr;
 
             friend class Tileset;            

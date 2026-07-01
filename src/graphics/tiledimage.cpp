@@ -1,4 +1,5 @@
 #include "sgc/graphics/tiledimage.hpp"
+#include "sgc/tile/tile.hpp"
 
 sgc::graphics::TiledImage::TiledImage(std::shared_ptr<TiledLayer> layer) :
     m_layer(layer)
@@ -17,8 +18,8 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     SDL_SetTextureBlendMode(tileset.GetTexture(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(tileset.GetTexture(), 255);
 
-    const sgc::math::uvec2 size_xy = tileset.GetSizeInTiles();
-    const sgc::math::uvec2 tileSize = tileset.GetTileSize();
+    const sgc::tile::TileSize2D size_xy = tileset.GetSizeInTiles();
+    const sgc::tile::TileSize2D tileSize = tileset.GetTileSize();
 
     auto size_x = context.view.camera.w / size_xy.x;
     auto size_y = context.view.camera.h / size_xy.y;
@@ -26,7 +27,7 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     for (auto y = 0; y < size_y; ++y) {
         for (auto x = 0; x < size_x; ++x) {
             
-            sgc::math::uvec2 gridPos{ static_cast<sgc::math::u64>(x), static_cast<sgc::math::u64>(y) };
+            sgc::tile::TilePosition2D gridPos{ static_cast<sgc::math::uval>(x), static_cast<sgc::math::uval>(y) };
 
             auto tileIdOpt = tileStorage.GetTileAt(gridPos);
 

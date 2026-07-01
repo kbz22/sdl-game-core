@@ -5,6 +5,8 @@
 #include "sgc/graphics/rendercontext.hpp"
 #include "sgc/math/vector.hpp"
 #include "sgc/graphics/color.hpp"
+#include "sgc/graphics/image.hpp"
+#include "sgc/tile/tile.hpp"
 
 namespace sgc::graphics {
 
@@ -12,25 +14,25 @@ namespace sgc::graphics {
         private:            
             int m_alpha = 255;
             graphics::color m_color{ 255, 255, 255, 255 };
-            math::vec2 m_position{ 0, 0 };
-            math::uvec2 m_size{ 0, 0 };
-            math::uvec2 m_cellSize{ 32, 32 };
+            PixelPosition2D m_position{ 0, 0 };
+            PixelSize2D m_size{ 0, 0 };
+            PixelSize2D m_cellSize{ 32, 32 };
 
         public:
             LineGrid(int x, int y, int width, int height, int cellWidth, int cellHeight);
-            LineGrid(math::vec2 position, math::uvec2 size, math::uvec2 cellSize);
+            LineGrid(PixelPosition2D position, PixelSize2D size, PixelSize2D cellSize);
 
-            math::vec2 GetPosition() const;
-            math::uvec2 GetSize() const;
+            PixelPosition2D GetPosition() const;
+            PixelSize2D GetSize() const;
             int GetAlpha() const;
             graphics::color GetColor() const;
-            math::uvec2 GetCellSize() const;
+            PixelSize2D GetCellSize() const;
 
-            void SetPosition(math::vec2 position);
-            void SetSize(math::uvec2 size);
+            void SetPosition(PixelPosition2D position);
+            void SetSize(PixelSize2D size);
             void SetAlpha(int alpha);
             void SetColor(graphics::color value);
-            void SetCellSize(math::uvec2 cellSize);
+            void SetCellSize(PixelSize2D cellSize);
 
             void Draw(const RenderContext& context) override;
     };
