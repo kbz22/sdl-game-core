@@ -11,7 +11,7 @@ void sgc::graphics::Sprite::SetTilesetPosition(sgc::math::uvec2 gridPosition)
     m_gridPosition = gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x;
 }
 
-void sgc::graphics::Sprite::SetTilesetPosition(tile::TileId tileId)
+void sgc::graphics::Sprite::SetTilesetPosition(data::TileId tileId)
 {
     m_gridPosition = tileId;
 }

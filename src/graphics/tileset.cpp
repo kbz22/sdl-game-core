@@ -9,7 +9,7 @@ sgc::graphics::Tileset::Tileset(std::shared_ptr<Image> image, sgc::math::uvec2 t
     m_gridSize.y = m_image->m_height / m_tileSize.y;
 }
 
-SDL_FRect sgc::graphics::Tileset::GetTileRect(tile::TileId id) const
+SDL_FRect sgc::graphics::Tileset::GetTileRect(data::TileId id) const
 {
     const sgc::math::uvec2 tilePosition{
         id % m_gridSize.x,
@@ -46,17 +46,17 @@ sgc::math::uvec2 sgc::graphics::Tileset::GetSizeInTiles() const
     return m_gridSize;
 }
 
-sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::u64 x, math::u64 y) const
+sgc::data::TileId sgc::graphics::Tileset::ToTileId(math::u64 x, math::u64 y) const
 {
-    return static_cast<tile::TileId>(y * m_gridSize.x + x);
+    return static_cast<data::TileId>(y * m_gridSize.x + x);
 }
 
-sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::vec2 position) const
+sgc::data::TileId sgc::graphics::Tileset::ToTileId(math::vec2 position) const
 {
     return ToTileId(static_cast<math::u64>(position.x), static_cast<math::u64>(position.y));
 }
 
-sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::uvec2 position) const
+sgc::data::TileId sgc::graphics::Tileset::ToTileId(math::uvec2 position) const
 {
     return ToTileId(position.x, position.y);
 }

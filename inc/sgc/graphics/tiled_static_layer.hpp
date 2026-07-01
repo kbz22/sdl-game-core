@@ -3,7 +3,7 @@
 #include "sgc/graphics/tileset.hpp"
 #include "sgc/graphics/idrawable.hpp"
 #include "sgc/graphics/rendercontext.hpp"
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
 
 #include <memory>
 #include <vector>

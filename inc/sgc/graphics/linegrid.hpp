@@ -3,7 +3,8 @@
 #include <SDL3/SDL.h>
 #include "sgc/graphics/idrawable.hpp"
 #include "sgc/graphics/rendercontext.hpp"
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
+#include "sgc/graphics/color.hpp"
 
 namespace sgc::graphics {
 

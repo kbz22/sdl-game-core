@@ -3,7 +3,8 @@
 #include "sgc/graphics/image.hpp"
 #include "sgc/graphics/idrawable.hpp"
 #include "sgc/graphics/rendercontext.hpp"
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
+#include "sgc/graphics/color.hpp"
 #include <memory>
 
 namespace sgc::graphics {

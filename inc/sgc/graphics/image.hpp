@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
 
 #include <SDL3/SDL.h>
 #include <memory>

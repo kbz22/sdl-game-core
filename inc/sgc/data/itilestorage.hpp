@@ -1,6 +1,7 @@
 #pragma once
 
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
+#include "sgc/data/tileid.hpp"
 
 #include <array>
 #include <optional>
@@ -15,7 +16,7 @@ namespace sgc::data {
         public:
             virtual ~ITileStorage() = default;
 
-            virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const = 0;
-            virtual void SetTileAt(GridCoord position, tile::TileId tileId) = 0;            
+            virtual std::optional<data::TileId> GetTileAt(GridCoord position) const = 0;
+            virtual void SetTileAt(GridCoord position, data::TileId tileId) = 0;            
     };
 }

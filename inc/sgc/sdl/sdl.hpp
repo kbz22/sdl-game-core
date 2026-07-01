@@ -2,8 +2,8 @@
 
 #include <SDL3/SDL.h>
 
-// #include "sgc/messaging/message_queue.hpp"
-#include "sgc/types.hpp"
+#include "sgc/math/vector.hpp"
+#include "sgc/graphics/color.hpp"
 #include "sgc/graphics/rendercontext.hpp"
 
 namespace sgc::sdl {
