@@ -8,8 +8,7 @@
 #include <unordered_map>
 
 namespace sgc::data {
-
-    using ChunkCoord = math::vec2;
+        
     using GridCoord = tile::TilePosition2D;
     using GridSize = tile::TileSize2D;
 

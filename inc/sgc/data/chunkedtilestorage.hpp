@@ -1,15 +1,11 @@
 #pragma once
 
 #include "sgc/data/itilestorage.hpp"
+#include "sgc/data/tilechunk.hpp"
+#include "sgc/asset/chunkedtilestorageassetbuilder.hpp"
 #include <optional>
 
-namespace sgc::data {
-
-    struct TileChunk {
-        static constexpr sgc::math::uval Size = 32;
-
-        std::array<tile::TileId, Size * Size> tiles;
-    };
+namespace sgc::data {        
 
     class ChunkedTileStorage : public ITileStorage {
         private:
@@ -22,7 +18,8 @@ namespace sgc::data {
             void SetChunkAt(ChunkCoord chunkPosition, tile::TileId tileId);
             void SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk);
             void RemoveChunkAt(ChunkCoord chunkPosition);
-            
+
+            friend struct sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset>;            
     };
 
 }    
