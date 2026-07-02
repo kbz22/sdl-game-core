@@ -7,10 +7,10 @@
 namespace sgc::asset
 {
     template<typename T>
-    class AssetSerializer
+    struct AssetSerializer
     {
         public:
-            static std::vector<uint8_t> Serialize(T &asset);
+            static std::vector<uint8_t> Serialize(const T &asset);
     };
 
 }

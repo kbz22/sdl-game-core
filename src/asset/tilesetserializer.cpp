@@ -2,7 +2,7 @@
 #include "sgc/data/serialization.hpp"
 #include <string>
 
-std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::TilesetAsset>::Serialize(sgc::asset::TilesetAsset &asset)
+std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::TilesetAsset>::Serialize(const sgc::asset::TilesetAsset &asset)
 {
     sgc::data::BinaryWriter writer{};
 

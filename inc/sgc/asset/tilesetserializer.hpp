@@ -6,10 +6,10 @@
 namespace sgc::asset {
 
     template<>
-    class AssetSerializer<TilesetAsset>
+    struct AssetSerializer<TilesetAsset>
     {
         public:
-            static std::vector<uint8_t> Serialize(TilesetAsset &asset);
+            static std::vector<uint8_t> Serialize(const TilesetAsset &asset);
     };
 
 }

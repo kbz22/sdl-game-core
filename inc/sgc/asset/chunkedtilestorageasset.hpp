@@ -12,4 +12,8 @@ namespace sgc::asset {
         data::TileChunk chunk;
     };
 
+    struct ChunkedTileStorageAsset {
+        std::vector<ChunkAsset> chunks;
+    };
+
 }
