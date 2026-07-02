@@ -10,7 +10,8 @@ std::shared_ptr<sgc::graphics::Image> sgc::asset::AssetLoader<sgc::graphics::Ima
 
     img->LoadTexture(
         context.renderer,
-        data);
+        data
+    );
 
     return img;
 };

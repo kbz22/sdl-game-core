@@ -13,7 +13,7 @@ namespace sgc::graphics {
     using PixelPosition2D = math::vec2;
     using PixelCount = math::uval;
 
-    class Tileset;
+    class Tileset;    
 
     struct TextureDeleter {
         void operator()(SDL_Texture* p) const noexcept;
