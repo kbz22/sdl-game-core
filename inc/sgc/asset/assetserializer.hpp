@@ -10,7 +10,7 @@ namespace sgc::asset
     class AssetSerializer
     {
         public:
-            static std::vector<uint8_t> Save(std::shared_ptr<T> asset);
+            static std::vector<uint8_t> Serialize(std::shared_ptr<T> asset);
     };
 
 }

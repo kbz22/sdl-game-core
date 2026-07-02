@@ -9,7 +9,7 @@ namespace sgc::asset {
     class AssetSerializer<sgc::asset::TilesetAsset>
     {
         public:
-            static std::vector<uint8_t> Save(std::shared_ptr<sgc::asset::TilesetAsset> asset);
+            static std::vector<uint8_t> Serialize(std::shared_ptr<sgc::asset::TilesetAsset> asset);
     };
 
 }
