@@ -1,14 +1,6 @@
 #include "sgc/asset/imageserializer.hpp"
 
-std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::ImageAsset>::Serialize(std::shared_ptr<sgc::asset::ImageAsset> asset)
-{
-    std::vector<uint8_t> data;
-
-    if (!asset) {
-        return data;
-    }
-
-    data = asset->data;    
-    
-    return data;
+std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::ImageAsset>::Serialize(sgc::asset::ImageAsset &asset)
+{   
+    return asset.data;
 }
