@@ -12,7 +12,7 @@ namespace sgc::sdl {
 
     void Shutdown();
 
-    SDL_Window* CreateWindow(const char* title, int width, int height, SDL_WindowFlags flags = SDL_WINDOW_RESIZABLE);        
+    SDL_Window* CreateWindow(const char* title, int width, int height, SDL_WindowFlags flags = SDL_WINDOW_RESIZABLE);
 
     SDL_Renderer* CreateRenderer(SDL_Window* window);
 
