@@ -1,4 +1,5 @@
 #include "sgc/graphics/rectangle.hpp"
+#include "sgc/coordinates/screenworld.hpp"
 
 sgc::graphics::Rectangle::Rectangle(int x, int y, int width, int height) :
     m_rect{
@@ -68,13 +69,35 @@ void sgc::graphics::Rectangle::SetColor(sgc::graphics::color color)
 
 void sgc::graphics::Rectangle::Draw(const RenderContext& context)
 {
-    if (!context.renderer) {
+    if (!context.renderer)
         return;
-    }
 
-    SDL_SetRenderDrawColor(context.renderer, m_color.r, m_color.g, m_color.b, m_color.a);
+    SDL_SetRenderDrawColor(
+        context.renderer,
+        m_color.r,
+        m_color.g,
+        m_color.b,
+        m_color.a
+    );
 
-    SDL_RenderRect(context.renderer, &m_rect);
+    auto position = coordinates::WorldToScreen(
+        {m_rect.x, m_rect.y},
+        context.view
+    );
+
+    auto size = coordinates::WorldToScreen(
+        {m_rect.x + m_rect.w, m_rect.y + m_rect.h},
+        context.view
+    );
+
+    SDL_FRect screenRect{
+        position.x,
+        position.y,
+        size.x - position.x,
+        size.y - position.y
+    };
+
+    SDL_RenderRect(context.renderer, &screenRect);
 }
 
     
