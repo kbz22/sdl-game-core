@@ -1,4 +1,5 @@
 #include "sgc/graphics/linegrid.hpp"
+#include "sgc/coordinates/screenworld.hpp"
 
 sgc::graphics::LineGrid::LineGrid(int x, int y, int width, int height, int cellWidth, int cellHeight) :
     m_position{
@@ -41,7 +42,7 @@ sgc::graphics::color sgc::graphics::LineGrid::GetColor() const
 
 int sgc::graphics::LineGrid::GetAlpha() const
 {
-    return m_alpha;
+    return m_color.a;
 }
 
 void sgc::graphics::LineGrid::SetPosition(sgc::graphics::PixelPosition2D position)
@@ -66,35 +67,82 @@ void sgc::graphics::LineGrid::SetColor(sgc::graphics::color color)
 
 void sgc::graphics::LineGrid::SetAlpha(int alpha)
 {
-    m_alpha = alpha;
+    m_color.a = alpha;
 }
 
 void sgc::graphics::LineGrid::Draw(const RenderContext& context)
 {
-    // Set the color and alpha for drawing
-    SDL_SetRenderDrawColor(context.renderer, m_color.r, m_color.g, m_color.b, m_alpha);
-
-    // Draw vertical lines
-    for (sgc::math::uval x = 0; x <= m_size.x; x += m_cellSize.x) {
-        float lineX = static_cast<float>(m_position.x + x);
-        SDL_RenderLine(
-            context.renderer,
-            lineX,
-            static_cast<float>(m_position.y),
-            lineX,
-            static_cast<float>(m_position.y + m_size.y)
-        );
+    if (!context.renderer) {
+        return;
     }
 
-    // Draw horizontal lines
-    for (sgc::math::uval y = 0; y <= m_size.y; y += m_cellSize.y) {
-        float lineY = static_cast<float>(m_position.y+y);
+    SDL_SetRenderDrawColor(
+        context.renderer,
+        m_color.r,
+        m_color.g,
+        m_color.b,
+        m_color.a
+    );
+    
+    for (sgc::math::uval x = 0; x <= m_size.x; x += m_cellSize.x)
+    {
+        auto worldStart = sgc::math::fvec2{
+            static_cast<float>(m_position.x + x),
+            static_cast<float>(m_position.y)
+        };
+
+        auto worldEnd = sgc::math::fvec2{
+            static_cast<float>(m_position.x + x),
+            static_cast<float>(m_position.y + m_size.y)
+        };
+
+        auto screenStart = sgc::coordinates::WorldToScreen(
+            worldStart,
+            context.view
+        );
+
+        auto screenEnd = sgc::coordinates::WorldToScreen(
+            worldEnd,
+            context.view
+        );
+
         SDL_RenderLine(
             context.renderer,
+            screenStart.x,
+            screenStart.y,
+            screenEnd.x,
+            screenEnd.y
+        );
+    }
+    
+    for (sgc::math::uval y = 0; y <= m_size.y; y += m_cellSize.y)
+    {
+        auto worldStart = sgc::math::fvec2{
             static_cast<float>(m_position.x),
-            lineY,
+            static_cast<float>(m_position.y + y)
+        };
+
+        auto worldEnd = sgc::math::fvec2{
             static_cast<float>(m_position.x + m_size.x),
-            lineY
+            static_cast<float>(m_position.y + y)
+        };
+
+        auto screenStart = sgc::coordinates::WorldToScreen(
+            worldStart,
+            context.view
+        );
+
+        auto screenEnd = sgc::coordinates::WorldToScreen(
+            worldEnd,
+            context.view
+        );
+
+        SDL_RenderLine(
+            context.renderer,
+            screenStart.x,
+            screenStart.y,
+            screenEnd.x,
+            screenEnd.y
         );
     }
 }

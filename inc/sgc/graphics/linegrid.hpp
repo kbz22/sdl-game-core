@@ -12,7 +12,6 @@ namespace sgc::graphics {
 
     class LineGrid : public IDrawable {
         private:            
-            int m_alpha = 255;
             graphics::color m_color{ 255, 255, 255, 255 };
             PixelPosition2D m_position{ 0, 0 };
             PixelSize2D m_size{ 0, 0 };

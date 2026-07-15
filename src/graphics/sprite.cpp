@@ -1,4 +1,5 @@
 #include "sgc/graphics/sprite.hpp"
+#include "sgc/coordinates/screenworld.hpp"
 
 sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, tile::TilesetPosition2D gridPosition) :
     m_tileset(tileset)
@@ -20,6 +21,7 @@ void sgc::graphics::Sprite::SetPositionPx(sgc::graphics::PixelPosition2D positio
 {
     m_position = position;
 }
+
 void sgc::graphics::Sprite::Draw(const RenderContext& context)
 {    
     if (!context.renderer) {
@@ -31,14 +33,36 @@ void sgc::graphics::Sprite::Draw(const RenderContext& context)
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(texture, 255);
 
-    SDL_FRect dstRect = {
+    sgc::math::fvec2 worldPosition{
         static_cast<float>(m_position.x),
-        static_cast<float>(m_position.y),
-        static_cast<float>(m_tileset->m_tileSize.x),
-        static_cast<float>(m_tileset->m_tileSize.y)
+        static_cast<float>(m_position.y)
     };
 
-    SDL_FRect srcRect = m_tileset->GetTileRect(m_tilesetPosition);
+    auto screenPosition = sgc::coordinates::WorldToScreen(
+        worldPosition,
+        context.view
+    );
+
+    auto screenBottomRight = sgc::coordinates::WorldToScreen({
+            worldPosition.x + m_tileset->m_tileSize.x,
+            worldPosition.y + m_tileset->m_tileSize.y
+        },
+        context.view
+    );
+
+    SDL_FRect dstRect{
+        screenPosition.x,
+        screenPosition.y,
+        screenBottomRight.x - screenPosition.x,
+        screenBottomRight.y - screenPosition.y
+    };
+
+    SDL_FRect srcRect =  m_tileset->GetTileRect(m_tilesetPosition);
     
-    SDL_RenderTexture(context.renderer, texture, &srcRect, &dstRect);
+    SDL_RenderTexture(
+        context.renderer,
+        texture,
+        &srcRect,
+        &dstRect
+    );
 }
