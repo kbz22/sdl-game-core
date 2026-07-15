@@ -68,6 +68,8 @@ add_library(sdl-game-core STATIC
 
     src/sdl/sdl.cpp
     src/sdl/sdl_win32.cpp
+
+    src/coordinates/screenworld.cpp
 )
 
 option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)

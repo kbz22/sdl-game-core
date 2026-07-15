@@ -6,7 +6,7 @@
 namespace sgc::math {
 
     using ival = int64_t;
-    using uval = uint64_t;
+    using uval = uint64_t;        
 
     struct vec2 {
         ival x;
@@ -23,6 +23,16 @@ namespace sgc::math {
         uval y;
 
         bool operator==(const uvec2& other) const noexcept
+        {
+            return x == other.x && y == other.y;
+        }
+    };
+
+    struct fvec2 {
+        float x;
+        float y;
+
+        bool operator==(const fvec2& other) const noexcept
         {
             return x == other.x && y == other.y;
         }
@@ -49,6 +59,16 @@ namespace std
         {
             return std::hash<sgc::math::ival>{}(v.x)
                  ^ (std::hash<sgc::math::ival>{}(v.y) << 1);
+        }
+    };
+
+    template<>
+    struct hash<sgc::math::fvec2>
+    {
+        size_t operator()(const sgc::math::fvec2& v) const noexcept
+        {
+            return std::hash<float>{}(v.x)
+                 ^ (std::hash<float>{}(v.y) << 1);
         }
     };
 }
