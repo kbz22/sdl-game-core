@@ -19,8 +19,8 @@ bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::filesystem::
         return false;
     }
 
-    m_width = static_cast<math::uval>(width);
-    m_height = static_cast<math::uval>(height);
+    m_width = static_cast<math::ival>(width);
+    m_height = static_cast<math::ival>(height);
 
     m_texture = std::move(texture);
     
@@ -53,7 +53,7 @@ bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::vector<uint8
     return true;
 }
 
-sgc::math::uvec2 sgc::graphics::Image::GetSize() const
+sgc::graphics::PixelSize2D sgc::graphics::Image::GetSize() const
 {
     return { m_width, m_height };
 }

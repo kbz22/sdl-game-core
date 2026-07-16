@@ -9,9 +9,9 @@
 
 namespace sgc::graphics {
 
-    using PixelSize2D = math::uvec2;
+    using PixelSize2D = math::vec2;
     using PixelPosition2D = math::vec2;
-    using PixelCount = math::uval;
+    using PixelCount = math::ival;
 
     class Tileset;    
 

@@ -29,8 +29,8 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     SDL_SetTextureBlendMode(tileset.GetTexture(), SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(tileset.GetTexture(), m_alpha);
 
-    const sgc::tile::TileSize2D size_xy = tileset.GetSizeInTiles();
-    const sgc::tile::TileSize2D tileSize = tileset.GetTileSize();
+    const auto size_xy = tileset.GetSizeInTiles();
+    const auto tileSize = tileset.GetTileSize();
 
     auto size_x = context.view.camera.w / size_xy.x;
     auto size_y = context.view.camera.h / size_xy.y;
