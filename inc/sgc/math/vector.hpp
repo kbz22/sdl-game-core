@@ -1,12 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <functional>
+#include "sgc/math/value.hpp"
 
-namespace sgc::math {
-
-    using ival = int64_t;
-    using uval = uint64_t;        
+namespace sgc::math {    
 
     struct vec2 {
         ival x;

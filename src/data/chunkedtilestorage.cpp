@@ -1,10 +1,11 @@
 #include "sgc/data/chunkedtilestorage.hpp"
+#include "sgc/math/value.hpp"
 
 std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCoord position) const
 {
-    sgc::data::ChunkCoord chunkPos;
-    chunkPos.x = position.x / TileChunk::Size;
-    chunkPos.y = position.y / TileChunk::Size;
+    ChunkCoord chunkPos;
+    chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
+    chunkPos.y = sgc::math::FloorDiv(position.y, TileChunk::Size);
 
     auto it = m_chunks.find(chunkPos);
     if (it == m_chunks.end()) {
@@ -13,22 +14,22 @@ std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCo
 
     const TileChunk& chunk = it->second;
 
-    sgc::math::uval localX = position.x % TileChunk::Size;
-    sgc::math::uval localY = position.y % TileChunk::Size;
+    auto localX = sgc::math::FloorMod(position.x, TileChunk::Size);
+    auto localY = sgc::math::FloorMod(position.y, TileChunk::Size);
 
     return chunk.tiles[localY * TileChunk::Size + localX];
 }
 
-void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, sgc::tile::TileId tileId)
+void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, tile::TileId tileId)
 {
-    sgc::data::ChunkCoord chunkPos;
-    chunkPos.x = position.x / TileChunk::Size;
-    chunkPos.y = position.y / TileChunk::Size;
+    ChunkCoord chunkPos;
+    chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
+    chunkPos.y = sgc::math::FloorDiv(position.y, TileChunk::Size);
 
-    TileChunk& chunk = m_chunks[chunkPos]; // This will create a new chunk if it doesn't exist
+    TileChunk& chunk = m_chunks[chunkPos];
 
-    sgc::math::uval localX = position.x % TileChunk::Size;
-    sgc::math::uval localY = position.y % TileChunk::Size;
+    auto localX = sgc::math::FloorMod(position.x, TileChunk::Size);
+    auto localY = sgc::math::FloorMod(position.y, TileChunk::Size);
 
     chunk.tiles[localY * TileChunk::Size + localX] = tileId;
 }
