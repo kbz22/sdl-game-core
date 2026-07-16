@@ -20,12 +20,12 @@ namespace sgc::graphics {
 
             PixelPosition2D GetPosition() const;
             PixelSize2D GetSize() const;
-            int GetAlpha() const;
+            uint8_t GetAlpha() const;
             graphics::color GetColor() const;
 
             void SetPosition(PixelPosition2D position);
             void SetSize(PixelSize2D size);
-            void SetAlpha(int alpha);
+            void SetAlpha(uint8_t alpha);
             void SetColor(graphics::color color);        
             
             void Draw(const RenderContext& context) override;

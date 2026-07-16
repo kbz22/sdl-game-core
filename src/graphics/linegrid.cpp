@@ -40,7 +40,7 @@ sgc::graphics::color sgc::graphics::LineGrid::GetColor() const
     return m_color;
 }
 
-int sgc::graphics::LineGrid::GetAlpha() const
+uint8_t sgc::graphics::LineGrid::GetAlpha() const
 {
     return m_color.a;
 }
@@ -65,7 +65,7 @@ void sgc::graphics::LineGrid::SetColor(sgc::graphics::color color)
     m_color = color;
 }
 
-void sgc::graphics::LineGrid::SetAlpha(int alpha)
+void sgc::graphics::LineGrid::SetAlpha(uint8_t alpha)
 {
     m_color.a = alpha;
 }

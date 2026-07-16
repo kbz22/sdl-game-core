@@ -35,7 +35,7 @@ sgc::graphics::PixelSize2D sgc::graphics::Rectangle::GetSize() const
     };
 }
 
-int sgc::graphics::Rectangle::GetAlpha() const
+uint8_t sgc::graphics::Rectangle::GetAlpha() const
 {
     return m_color.a;
 }
@@ -57,7 +57,7 @@ void sgc::graphics::Rectangle::SetSize(sgc::graphics::PixelSize2D size)
     m_rect.h = static_cast<float>(size.y);
 }
 
-void sgc::graphics::Rectangle::SetAlpha(int alpha)
+void sgc::graphics::Rectangle::SetAlpha(uint8_t alpha)
 {
     m_color.a = alpha;
 }

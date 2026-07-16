@@ -7,6 +7,16 @@ sgc::graphics::TiledImage::TiledImage(std::shared_ptr<TiledLayer> layer) :
 {
 }
 
+uint8_t sgc::graphics::TiledImage::GetAlpha() const
+{
+    return m_alpha;
+}
+
+void sgc::graphics::TiledImage::SetAlpha(uint8_t alpha)
+{
+    m_alpha = alpha;
+}
+
 void sgc::graphics::TiledImage::Draw(RenderContext const& context)
 {
     if (!m_layer || !context.renderer) {
@@ -17,7 +27,7 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     auto& tileStorage = m_layer->GetTileStorage();
 
     SDL_SetTextureBlendMode(tileset.GetTexture(), SDL_BLENDMODE_BLEND);
-    SDL_SetTextureAlphaMod(tileset.GetTexture(), 255);
+    SDL_SetTextureAlphaMod(tileset.GetTexture(), m_alpha);
 
     const sgc::tile::TileSize2D size_xy = tileset.GetSizeInTiles();
     const sgc::tile::TileSize2D tileSize = tileset.GetTileSize();
