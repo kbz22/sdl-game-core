@@ -20,8 +20,14 @@ std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCo
     return chunk.tiles[localY * TileChunk::Size + localX];
 }
 
-void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, tile::TileId tileId)
+void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, std::optional<sgc::tile::TileId> tileId)
 {
+    if (!tileId.has_value()) {
+        //! If tileId is std::nullopt, we can choose to either do nothing or remove the tile.
+        // For this implementation, we'll do nothing.
+        return;
+    }
+
     ChunkCoord chunkPos;
     chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
     chunkPos.y = sgc::math::FloorDiv(position.y, TileChunk::Size);
@@ -31,7 +37,7 @@ void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, tile::TileId t
     auto localX = sgc::math::FloorMod(position.x, TileChunk::Size);
     auto localY = sgc::math::FloorMod(position.y, TileChunk::Size);
 
-    chunk.tiles[localY * TileChunk::Size + localX] = tileId;
+    chunk.tiles[localY * TileChunk::Size + localX] = tileId.value();
 }
 
 void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, sgc::tile::TileId tileId)

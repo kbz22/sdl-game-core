@@ -13,7 +13,7 @@ namespace sgc::data {
 
         public:
             virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const override;
-            virtual void SetTileAt(GridCoord position, tile::TileId tileId) override;
+            virtual void SetTileAt(GridCoord position, std::optional<tile::TileId> tileId) override;
 
             void SetChunkAt(ChunkCoord chunkPosition, tile::TileId tileId);
             void SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk);

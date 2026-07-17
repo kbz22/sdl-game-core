@@ -10,7 +10,7 @@ std::shared_ptr<sgc::data::ChunkedTileStorage> sgc::asset::AssetLoader<sgc::data
 )
 {
     sgc::data::BinaryReader reader{ data.data() };
-    sgc::data::ChunkedTileStorage storage;    
+    sgc::data::ChunkedTileStorage storage;
 
     ChunkedTileStorageSize chunkCount = reader.Read<ChunkedTileStorageSize>();
 

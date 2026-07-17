@@ -17,6 +17,6 @@ namespace sgc::data {
             virtual ~ITileStorage() = default;
 
             virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const = 0;
-            virtual void SetTileAt(GridCoord position, tile::TileId tileId) = 0;            
+            virtual void SetTileAt(GridCoord position, std::optional<tile::TileId> tileId) = 0;
     };
 }
