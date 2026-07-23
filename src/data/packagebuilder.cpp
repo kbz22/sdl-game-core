@@ -10,6 +10,12 @@ void sgc::data::PackageBuilder::AddAsset(
     m_assets.push_back({ id, type, data });
 }
 
+void sgc::data::PackageBuilder::AddAsset(
+    Asset asset)
+{
+    m_assets.push_back(asset);
+}
+
 bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
 {
     std::ofstream out(path, std::ios::binary);

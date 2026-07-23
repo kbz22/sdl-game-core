@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
 namespace sgc::data {
 
@@ -16,7 +17,13 @@ namespace sgc::data {
         Texture,
 
         Count
-    };        
+    };
+    
+    struct Asset {
+        AssetId id;
+        AssetType type;
+        std::vector<uint8_t> data;
+    };
 
     inline AssetId HashAsset(const std::string& str)
     {

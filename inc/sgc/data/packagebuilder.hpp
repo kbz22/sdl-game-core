@@ -12,19 +12,17 @@ namespace sgc::data {
         void AddAsset(
             AssetId id,
             AssetType type,
-            const std::vector<uint8_t>& data);
+            const std::vector<uint8_t>& data
+        );
+        
+        void AddAsset(
+            Asset asset
+        );
 
         bool Save(const std::filesystem::path& path);
 
     private:
-        struct PendingAsset
-        {
-            AssetId id;
-            AssetType type;
-            std::vector<uint8_t> data;
-        };
-
-        std::vector<PendingAsset> m_assets;
+        std::vector<Asset> m_assets;
     };
 
 }
