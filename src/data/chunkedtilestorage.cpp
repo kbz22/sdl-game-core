@@ -22,15 +22,18 @@ std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCo
 
 void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, std::optional<sgc::tile::TileId> tileId)
 {
-    if (!tileId.has_value()) {
-        //! If tileId is std::nullopt, we can choose to either do nothing or remove the tile.
-        // For this implementation, we'll do nothing.
-        return;
-    }
-
     ChunkCoord chunkPos;
     chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
     chunkPos.y = sgc::math::FloorDiv(position.y, TileChunk::Size);
+
+    // setting a tile std::nullopt will remove entire chunk if it exists
+    // this is to enable reverse operations on the tile storage, as setting a position
+    // in an empty chunk to actual value creates that chunk in memory
+
+    if (!tileId.has_value()) {
+        RemoveChunkAt(chunkPos);
+        return;
+    }
 
     TileChunk& chunk = m_chunks[chunkPos];
 
@@ -58,5 +61,7 @@ void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, const T
 
 void sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
 {
-    m_chunks.erase(chunkPosition);
+    if (m_chunks.find(chunkPosition) != m_chunks.end()) {
+        m_chunks.erase(chunkPosition);
+    }
 }
