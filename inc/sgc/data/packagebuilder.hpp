@@ -14,15 +14,15 @@ namespace sgc::data {
             AssetType type,
             const std::vector<uint8_t>& data
         );
-        
+
         void AddAsset(
-            Asset asset
+            BinaryAsset asset
         );
 
         bool Save(const std::filesystem::path& path);
 
     private:
-        std::vector<Asset> m_assets;
+        std::vector<BinaryAsset> m_assets;
     };
 
 }

@@ -55,6 +55,8 @@ add_library(sdl-game-core STATIC
     src/data/package.cpp
     src/data/packagebuilder.cpp
     src/data/resourcemanager.cpp
+    src/data/map.cpp
+    src/data/layer.cpp
 
     src/graphics/image.cpp
     src/graphics/rectangle.cpp

@@ -18,10 +18,14 @@ namespace sgc::data {
 
         Count
     };
-    
-    struct Asset {
+
+    struct AssetHeader {
         AssetId id;
         AssetType type;
+    };
+    
+    struct BinaryAsset {
+        AssetHeader header;
         std::vector<uint8_t> data;
     };
 

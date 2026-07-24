@@ -7,11 +7,12 @@ void sgc::data::PackageBuilder::AddAsset(
     AssetType type,
     const std::vector<uint8_t>& data)
 {
-    m_assets.push_back({ id, type, data });
+    m_assets.push_back({ { id, type }, data });
 }
 
 void sgc::data::PackageBuilder::AddAsset(
-    Asset asset)
+    BinaryAsset asset
+)
 {
     m_assets.push_back(asset);
 }
@@ -39,8 +40,7 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
 
     std::vector<PackageEntry> entries;
 
-    uint32_t offset = sizeof(PackageHeader)
-                    + m_assets.size() * sizeof(PackageEntry);
+    uint32_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
 
     header.dataOffset = offset;
 
@@ -48,8 +48,8 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     for (auto& a : m_assets)
     {
         PackageEntry e{};
-        e.id = a.id;
-        e.type = a.type;
+        e.id = a.header.id;
+        e.type = a.header.type;
         e.offset = offset;
         e.size = a.data.size();
 
