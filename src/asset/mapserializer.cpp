@@ -9,8 +9,7 @@ std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serializ
     writer.Write(static_cast<size_t>(asset.layers.size()));
 
     for (const auto &layer : asset.layers) {
-        writer.Write(layer.name);
-        writer.Write(layer.storageId);
+        writer.Write(layer.name);        
         writer.Write(static_cast<size_t>(layer.tags.size()));
         for (const auto &tag : layer.tags) {
             writer.Write(tag);
