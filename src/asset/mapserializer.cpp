@@ -1,4 +1,4 @@
-#include "sgc/asset/mapassetserializer.hpp"
+#include "sgc/asset/mapserializer.hpp"
 #include "sgc/data/serialization.hpp"
 
 std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serialize(const MapAsset &asset)
