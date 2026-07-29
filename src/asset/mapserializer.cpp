@@ -32,9 +32,7 @@ std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serializ
         } else {
             throw std::runtime_error("Unknown tile storage type");
         }        
-    }
-
-    
+    }    
 
     return writer.buffer;
 }
