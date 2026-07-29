@@ -22,6 +22,7 @@ namespace sgc::data {
     struct AssetHeader {
         AssetId id;
         AssetType type;
+        size_t size;
     };
     
     struct BinaryAsset {

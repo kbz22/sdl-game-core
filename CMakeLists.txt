@@ -42,6 +42,7 @@ add_library(sdl-game-core STATIC
     src/debug/log.cpp
 
     src/asset/imagedeserializer.cpp
+    src/asset/imageassetdeserializer.cpp
     src/asset/imageserializer.cpp
     src/asset/tilesetassetdeserializer.cpp
     src/asset/tilesetserializer.cpp
