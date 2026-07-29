@@ -13,8 +13,7 @@ namespace sgc::asset {
         public:
             static std::shared_ptr<AssetHeader> Load(
                 const std::vector<uint8_t> &data,
-                sgc::data::ResourceContext& context,
-                sgc::data::ResourceManager& rm
+                sgc::data::ResourceContext& context
             );
     };
 

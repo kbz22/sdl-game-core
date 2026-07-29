@@ -1,7 +1,7 @@
 #include "sgc/asset/assetheaderdeserializer.hpp"
 #include "sgc/data/resourcecontext.hpp"
 
-std::shared_ptr<sgc::data::AssetHeader> sgc::asset::AssetDeserializer<sgc::data::AssetHeader>::Load(const std::vector<uint8_t> &data, sgc::data::ResourceContext& context, sgc::data::ResourceManager& rm)
+std::shared_ptr<sgc::data::AssetHeader> sgc::asset::AssetDeserializer<sgc::data::AssetHeader>::Load(const std::vector<uint8_t> &data, sgc::data::ResourceContext& context)
 {
     auto assetHeader = std::make_shared<sgc::data::AssetHeader>();
 

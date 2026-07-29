@@ -43,8 +43,8 @@ add_library(sdl-game-core STATIC
 
     src/asset/imagedeserializer.cpp
     src/asset/imageserializer.cpp
-    src/asset/tilesetdeserializer.cpp
-    src/asset/tilesetserializer.cpp        
+    src/asset/tilesetassetdeserializer.cpp
+    src/asset/tilesetserializer.cpp
     src/asset/chunkedtilestoragedeserializer.cpp
     src/asset/chunkedtilestorageserializer.cpp
     src/asset/chunkedtilestorageassetbuilder.cpp

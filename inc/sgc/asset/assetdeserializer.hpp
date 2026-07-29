@@ -4,10 +4,7 @@
 #include <vector>
 
 namespace sgc::data {
-
-    class ResourceManager;
     struct ResourceContext;
-
 }
 
 namespace sgc::asset {
@@ -17,8 +14,7 @@ namespace sgc::asset {
     {
         static std::shared_ptr<T> Load(
             const std::vector<uint8_t>& data,
-            sgc::data::ResourceContext& context,
-            sgc::data::ResourceManager& rm
+            sgc::data::ResourceContext& context
         );
     };
 
