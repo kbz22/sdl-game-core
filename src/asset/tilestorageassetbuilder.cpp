@@ -1,4 +1,4 @@
-#include "sgc/asset/tilestoragebuilder.hpp"
+#include "sgc/asset/tilestorageassetbuilder.hpp"
 #include "sgc/asset/chunkedtilestorageassetbuilder.hpp"
 #include "sgc/data/chunkedtilestorage.hpp"
 #include <stdexcept>

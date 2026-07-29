@@ -1,20 +1,20 @@
 #pragma once
 
-#include "sgc/graphics/tileset.hpp"
-#include "sgc/asset/assetloader.hpp"
+#include <memory>
 
-namespace sgc::data
-{
+namespace sgc::data {
+
     class ResourceManager;
     struct ResourceContext;
+
 }
 
 namespace sgc::asset {
 
-    template<>
-    struct AssetLoader<sgc::graphics::Tileset>
+    template<typename T>
+    struct AssetDeserializer
     {
-        static std::shared_ptr<sgc::graphics::Tileset> Load(
+        static std::shared_ptr<T> Load(
             const std::vector<uint8_t>& data,
             sgc::data::ResourceContext& context,
             sgc::data::ResourceManager& rm

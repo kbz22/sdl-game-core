@@ -5,7 +5,7 @@
 #include "sgc/graphics/image.hpp"
 #include "sgc/graphics/rendercontext.hpp"
 #include "sgc/data/resourcecontext.hpp"
-#include "sgc/asset/assetloader.hpp"
+#include "sgc/asset/assetdeserializer.hpp"
 #include <unordered_map>
 #include <memory>
 
@@ -42,7 +42,7 @@ namespace sgc::data {
         const auto data = m_package->ReadAssetData(id);
 
         // Let the loader create the object
-        std::shared_ptr<T> resource = sgc::asset::AssetLoader<T>::Load(data, context, *this);
+        std::shared_ptr<T> resource = sgc::asset::AssetDeserializer<T>::Load(data, context, *this);
 
         // Store in cache
         m_cache[id] = resource;

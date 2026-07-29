@@ -1,9 +1,9 @@
-#include "sgc/asset/chunkedtilestorageloader.hpp"
+#include "sgc/asset/chunkedtilestoragedeserializer.hpp"
 #include "sgc/asset/chunkedtilestorageasset.hpp"
 #include "sgc/data/serialization.hpp"
 #include <unordered_map>
 
-std::shared_ptr<sgc::data::ChunkedTileStorage> sgc::asset::AssetLoader<sgc::data::ChunkedTileStorage>::Load(
+std::shared_ptr<sgc::data::ChunkedTileStorage> sgc::asset::AssetDeserializer<sgc::data::ChunkedTileStorage>::Load(
     const std::vector<uint8_t>& data,
     sgc::data::ResourceContext& context,
     sgc::data::ResourceManager& rm

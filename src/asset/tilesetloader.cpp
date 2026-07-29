@@ -1,9 +1,9 @@
-#include "sgc/asset/tilesetloader.hpp"
+#include "sgc/asset/tilesetdeserializer.hpp"
 #include "sgc/data/resourcemanager.hpp"
 #include "sgc/data/serialization.hpp"
 #include "sgc/asset/tilesetasset.hpp"
 
-std::shared_ptr<sgc::graphics::Tileset> sgc::asset::AssetLoader<sgc::graphics::Tileset>::Load(
+std::shared_ptr<sgc::graphics::Tileset> sgc::asset::AssetDeserializer<sgc::graphics::Tileset>::Load(
     const std::vector<uint8_t>& data,
     sgc::data::ResourceContext& context,
     sgc::data::ResourceManager& rm
