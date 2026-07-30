@@ -5,6 +5,11 @@
 
 namespace sgc::asset {
 
-    
+    template<>
+    class AssetDeserializer<MapAsset>
+    {
+        public:
+            static MapAsset Deserialize(const std::vector<uint8_t>& bytes);
+    };
 
 }

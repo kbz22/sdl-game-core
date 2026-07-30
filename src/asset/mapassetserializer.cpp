@@ -10,7 +10,7 @@ std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serializ
     writer.Write(asset.layers.size());
 
     for(const auto &layer : asset.layers) {
-        writer.Write(layer.name);
+        writer.WriteString(layer.name);
         writer.Write(layer.tags.size());
 
         for(const auto &tagId : layer.tags) {
