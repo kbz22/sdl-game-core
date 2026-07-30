@@ -48,6 +48,7 @@ add_library(sdl-game-core STATIC
     src/asset/chunkedtilestorageassetdeserializer.cpp
     src/asset/chunkedtilestorageassetserializer.cpp
     src/asset/chunkedtilestorageassetbuilder.cpp
+    src/asset/chunkedtilestoragebuilder.cpp
     src/asset/mapassetserializer.cpp
     src/asset/mapassetdeserializer.cpp
     src/asset/tilestorageassetbuilder.cpp
