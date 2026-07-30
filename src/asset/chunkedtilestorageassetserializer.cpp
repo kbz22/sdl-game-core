@@ -1,4 +1,4 @@
-#include "sgc/asset/chunkedtilestorageserializer.hpp"
+#include "sgc/asset/chunkedtilestorageassetserializer.hpp"
 #include "sgc/data/serialization.hpp"
 
 std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::ChunkedTileStorageAsset>::Serialize(const sgc::asset::ChunkedTileStorageAsset &asset)

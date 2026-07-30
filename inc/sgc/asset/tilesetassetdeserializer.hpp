@@ -5,15 +5,12 @@
 
 namespace sgc::asset {
 
-    using namespace sgc::data;
-
     template<>
     struct AssetDeserializer<TilesetAsset>
     {
         public:
-            static std::shared_ptr<TilesetAsset> Load(
-                const std::vector<uint8_t> &data,
-                sgc::data::ResourceContext& context
+            static TilesetAsset Deserialize(
+                const std::vector<uint8_t> &data
             );
     };
 

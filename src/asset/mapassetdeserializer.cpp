@@ -1,0 +1,1 @@
+#include "sgc/asset/mapassetdeserializer.hpp"

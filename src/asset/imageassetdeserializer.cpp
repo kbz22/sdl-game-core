@@ -1,10 +1,10 @@
 #include "sgc/asset/imageassetdeserializer.hpp"
 
-std::shared_ptr<sgc::asset::ImageAsset> sgc::asset::AssetDeserializer<sgc::asset::ImageAsset>::Load(const std::vector<uint8_t> &data, sgc::data::ResourceContext& context)
+sgc::asset::ImageAsset sgc::asset::AssetDeserializer<sgc::asset::ImageAsset>::Deserialize(const std::vector<uint8_t> &data)
 {
-    auto imageAsset = std::make_shared<sgc::asset::ImageAsset>();
+    static sgc::asset::ImageAsset imageAsset;
 
-    std::memcpy(imageAsset.get(), data.data(), sizeof(sgc::asset::ImageAsset));
+    std::memcpy(&imageAsset, data.data(), sizeof(sgc::asset::ImageAsset));
 
     return imageAsset;
 }

@@ -1,4 +1,4 @@
-#include "sgc/asset/mapserializer.hpp"
+#include "sgc/asset/mapassetserializer.hpp"
 #include "sgc/data/serialization.hpp"
 #include <stdexcept>
 
