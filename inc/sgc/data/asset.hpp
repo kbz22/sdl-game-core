@@ -18,12 +18,18 @@ namespace sgc::data {
 
         Count
     };
-
+    
     struct AssetHeader {
         AssetId id;
         AssetType type;
         size_t size;
     };
+
+    // Used for serializing and deserializing asset headers
+    constexpr size_t PackedAssetHeaderSize =
+        sizeof(data::AssetId) +
+        sizeof(data::AssetType) +
+        sizeof(size_t);
     
     struct BinaryAsset {
         AssetHeader header;

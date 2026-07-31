@@ -16,13 +16,14 @@ sgc::asset::MapAsset sgc::asset::AssetDeserializer<sgc::asset::MapAsset>::Deseri
 
     mapAsset.layers.resize(layerCount);
     for(size_t i = 0; i < layerCount; ++i) {
-        mapAsset.layers[i].name = reader.ReadString();
+        size_t index = layerCount - 1 - i; // Reverse order to match rendering order
+        mapAsset.layers[index].name = reader.ReadString();
 
         auto tagCount = reader.Read<size_t>();
-        mapAsset.layers[i].tags.resize(tagCount);
+        mapAsset.layers[index].tags.resize(tagCount);
 
         for(size_t j = 0; j < tagCount; ++j) {
-            mapAsset.layers[i].tags[j] = reader.Read<sgc::data::LayerTagId>();
+            mapAsset.layers[index].tags[j] = reader.Read<sgc::data::LayerTagId>();
         }
 
         uint8_t tileStorageType = reader.Read<uint8_t>();
@@ -38,7 +39,7 @@ sgc::asset::MapAsset sgc::asset::AssetDeserializer<sgc::asset::MapAsset>::Deseri
                     bytes.begin() + reader.offset,
                     bytes.begin() + reader.offset + tileStorageSize
                 );
-                mapAsset.layers[i].tileStorage = AssetDeserializer<ChunkedTileStorageAsset>::Deserialize(
+                mapAsset.layers[index].tileStorage = AssetDeserializer<ChunkedTileStorageAsset>::Deserialize(
                     tileStorageBytes
                 );
                 reader.offset += tileStorageSize;

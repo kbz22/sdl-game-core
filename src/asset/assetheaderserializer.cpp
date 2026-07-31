@@ -7,6 +7,7 @@ std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::data::AssetHeader>::Serial
 
     writer.Write(asset.id);
     writer.Write(asset.type);
+    writer.Write(asset.size);
 
     return writer.buffer;
 }
