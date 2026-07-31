@@ -18,12 +18,22 @@ sgc::asset::MapAsset sgc::asset::AssetDeserializer<sgc::asset::MapAsset>::Deseri
     for(size_t i = 0; i < layerCount; ++i) {
         mapAsset.layers[i].name = reader.ReadString();
 
+        auto tagCount = reader.Read<size_t>();
+        mapAsset.layers[i].tags.resize(tagCount);
+
+        for(size_t j = 0; j < tagCount; ++j) {
+            mapAsset.layers[i].tags[j] = reader.Read<sgc::data::LayerTagId>();
+        }
+
         uint8_t tileStorageType = reader.Read<uint8_t>();
 
         switch(tileStorageType) {
             case 0: // ChunkedTileStorageAsset
             {
                 auto tileStorageSize = reader.Read<size_t>();
+
+                if(tileStorageSize == 0) continue;
+
                 std::vector<uint8_t> tileStorageBytes(
                     bytes.begin() + reader.offset,
                     bytes.begin() + reader.offset + tileStorageSize
