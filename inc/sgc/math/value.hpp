@@ -20,4 +20,14 @@ namespace sgc::math {
         return a - FloorDiv(a, b) * b;
     }
 
+    constexpr ival Abs(ival value)
+    {
+        return value < 0 ? -value : value;
+    }
+
+    constexpr ival AbsMod(ival value, ival mod)
+    {
+        return ((value % mod) + mod) % mod;
+    }
+
 }
