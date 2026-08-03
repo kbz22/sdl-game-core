@@ -13,6 +13,22 @@ namespace sgc::math {
         {
             return x == other.x && y == other.y;
         }
+
+        vec2 operator-(const vec2& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y
+            };
+        }
+
+        vec2 operator+(const vec2& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y
+            };
+        }
     };
 
     struct uvec2 {
@@ -23,6 +39,22 @@ namespace sgc::math {
         {
             return x == other.x && y == other.y;
         }
+
+        uvec2 operator-(const uvec2& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y
+            };
+        }
+
+        uvec2 operator+(const uvec2& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y
+            };
+        }
     };
 
     struct fvec2 {
@@ -32,6 +64,22 @@ namespace sgc::math {
         bool operator==(const fvec2& other) const noexcept
         {
             return x == other.x && y == other.y;
+        }
+
+        fvec2 operator-(const fvec2& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y
+            };
+        }
+
+        fvec2 operator+(const fvec2& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y
+            };
         }
     };
 
@@ -45,6 +93,26 @@ namespace sgc::math {
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
         }
+
+        vec4 operator-(const vec4& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y,
+                z - other.z,
+                w - other.w
+            };
+        }
+
+        vec4 operator+(const vec4& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y,
+                z + other.z,
+                w + other.w
+            };
+        }
     };
 
     struct uvec4 {
@@ -57,6 +125,26 @@ namespace sgc::math {
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
         }
+
+        uvec4 operator-(const uvec4& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y,
+                z - other.z,
+                w - other.w
+            };
+        }
+
+        uvec4 operator+(const uvec4& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y,
+                z + other.z,
+                w + other.w
+            };
+        }
     };
 
     struct fvec4 {
@@ -68,6 +156,26 @@ namespace sgc::math {
         bool operator==(const fvec4& other) const noexcept
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
+        }
+
+        fvec4 operator-(const fvec4& other) const
+        {
+            return {
+                x - other.x,
+                y - other.y,
+                z - other.z,
+                w - other.w
+            };
+        }
+
+        fvec4 operator+(const fvec4& other) const
+        {
+            return {
+                x + other.x,
+                y + other.y,
+                z + other.z,
+                w + other.w
+            };
         }
     };
 
