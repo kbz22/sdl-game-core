@@ -2,7 +2,7 @@
 #include "sgc/debug/log.hpp"
 #include <SDL3_image/SDL_image.h>
 
-bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::filesystem::path path)
+bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::filesystem::path path, TextureFilterMode filterMode)
 {    
     using namespace sgc;
     sgc::graphics::TexturePtr texture(IMG_LoadTexture(renderer, path.string().c_str()));
@@ -21,13 +21,13 @@ bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::filesystem::
 
     m_width = static_cast<math::ival>(width);
     m_height = static_cast<math::ival>(height);
-
-    m_texture = std::move(texture);
+    
+    SetTexture(std::move(texture), filterMode);
     
     return true;
 }
 
-bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::vector<uint8_t> data)
+bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::vector<uint8_t> data, TextureFilterMode filterMode)
 {    
     SDL_IOStream* stream = SDL_IOFromConstMem(data.data(), data.size());
 
@@ -45,12 +45,18 @@ bool sgc::graphics::Image::LoadTexture(SDL_Renderer* renderer, std::vector<uint8
         return false;
     }
 
-    m_width = static_cast<math::uval>(width);
-    m_height = static_cast<math::uval>(height);
+    m_width = static_cast<math::ival>(width);
+    m_height = static_cast<math::ival>(height);
 
-    m_texture = std::move(texture);
+    SetTexture(std::move(texture), filterMode);
 
     return true;
+}
+
+void sgc::graphics::Image::SetTexture(TexturePtr texture, TextureFilterMode filterMode)
+{
+    SDL_SetTextureScaleMode(texture.get(), static_cast<SDL_ScaleMode>(filterMode));
+    m_texture = std::move(texture);
 }
 
 sgc::graphics::PixelSize2D sgc::graphics::Image::GetSize() const
