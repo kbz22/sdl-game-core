@@ -29,6 +29,21 @@ namespace sgc::math {
                 y + other.y
             };
         }
+
+        vec2 operator*(ival scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar
+            };
+        }
+
+        vec2 operator*=(ival scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            return *this;
+        }
     };
 
     struct uvec2 {
@@ -55,6 +70,21 @@ namespace sgc::math {
                 y + other.y
             };
         }
+
+        uvec2 operator*(uval scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar
+            };
+        }
+
+        uvec2 operator*=(uval scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            return *this;
+        }
     };
 
     struct fvec2 {
@@ -80,6 +110,21 @@ namespace sgc::math {
                 x + other.x,
                 y + other.y
             };
+        }
+
+        fvec2 operator*(float scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar
+            };
+        }
+
+        fvec2 operator*=(float scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            return *this;
         }
     };
 
@@ -113,6 +158,25 @@ namespace sgc::math {
                 w + other.w
             };
         }
+
+        vec4 operator*(ival scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar,
+                z * scalar,
+                w * scalar
+            };
+        }
+
+        vec4 operator*=(ival scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            z *= scalar;
+            w *= scalar;
+            return *this;
+        }
     };
 
     struct uvec4 {
@@ -145,6 +209,25 @@ namespace sgc::math {
                 w + other.w
             };
         }
+
+        uvec4 operator*(uval scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar,
+                z * scalar,
+                w * scalar
+            };
+        }
+
+        uvec4 operator*=(uval scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            z *= scalar;
+            w *= scalar;
+            return *this;
+        }
     };
 
     struct fvec4 {
@@ -176,6 +259,25 @@ namespace sgc::math {
                 z + other.z,
                 w + other.w
             };
+        }
+
+        fvec4 operator*(float scalar) const
+        {
+            return {
+                x * scalar,
+                y * scalar,
+                z * scalar,
+                w * scalar
+            };
+        }
+        
+        fvec4 operator*=(float scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            z *= scalar;
+            w *= scalar;
+            return *this;
         }
     };
 
