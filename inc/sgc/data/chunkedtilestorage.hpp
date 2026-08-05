@@ -20,7 +20,7 @@ namespace sgc::data {
 
             void SetChunkAt(ChunkCoord chunkPosition, tile::TileId tileId);
             void SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk);
-            void RemoveChunkAt(ChunkCoord chunkPosition);
+            std::optional<TileChunk> RemoveChunkAt(ChunkCoord chunkPosition);
 
             ChunkCoord GetChunkCoordAt(GridCoord position) const;
 

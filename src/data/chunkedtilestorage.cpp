@@ -99,11 +99,16 @@ void sgc::data::ChunkedTileStorage::SetChunkAt(ChunkCoord chunkPosition, const T
     m_chunks[chunkPosition] = chunk;
 }
 
-void sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
+std::optional<sgc::data::TileChunk> sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
 {
-    if (m_chunks.find(chunkPosition) != m_chunks.end()) {
-        m_chunks.erase(chunkPosition);
-    }
+    auto it = m_chunks.find(chunkPosition);
+    if (it != m_chunks.end()) {
+        TileChunk& chunk = it->second;
+        m_chunks.erase(it);        
+        return chunk;
+    }   
+
+    return std::nullopt;
 }
 
 sgc::data::ChunkCoord sgc::data::ChunkedTileStorage::GetChunkCoordAt(GridCoord position) const
