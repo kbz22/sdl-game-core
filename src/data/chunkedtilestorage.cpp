@@ -105,3 +105,11 @@ void sgc::data::ChunkedTileStorage::RemoveChunkAt(ChunkCoord chunkPosition)
         m_chunks.erase(chunkPosition);
     }
 }
+
+sgc::data::ChunkCoord sgc::data::ChunkedTileStorage::GetChunkCoordAt(GridCoord position) const
+{
+    ChunkCoord chunkPos;
+    chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
+    chunkPos.y = sgc::math::FloorDiv(position.y, TileChunk::Size);
+    return chunkPos;
+}

@@ -63,6 +63,9 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
 
     for (const auto& tile : tileBuffer)
     {
+        if (!tileset.IsDrawableTileId(tile.id))
+            continue;
+
         SDL_FRect srcRect = tileset.GetTileRect(tile.id);
 
         sgc::math::fvec2 worldPosition{

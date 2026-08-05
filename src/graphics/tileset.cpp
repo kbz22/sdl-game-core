@@ -46,6 +46,16 @@ sgc::tile::TileSize2D sgc::graphics::Tileset::GetSizeInTiles() const
     return m_gridSize;
 }
 
+sgc::tile::TileId sgc::graphics::Tileset::TileIdCount() const
+{
+    return static_cast<tile::TileId>(m_gridSize.x * m_gridSize.y);
+}
+
+bool sgc::graphics::Tileset::IsDrawableTileId(tile::TileId tileId) const
+{
+    return tileId < (m_gridSize.x * m_gridSize.y);
+}
+
 sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::uval x, math::uval y) const
 {
     return static_cast<tile::TileId>(y * m_gridSize.x + x);

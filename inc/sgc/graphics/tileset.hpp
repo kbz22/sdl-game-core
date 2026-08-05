@@ -25,6 +25,9 @@ namespace sgc::graphics {
             graphics::PixelSize2D GetTileSize() const;                       
             graphics::PixelSize2D GetImageSize() const;
             tile::TileSize2D GetSizeInTiles() const;
+            tile::TileId TileIdCount() const;
+            
+            bool IsDrawableTileId(tile::TileId tileId) const;
 
             tile::TileId ToTileId(tile::TilesetPosition2D position) const;
             tile::TileId ToTileId(tile::TilePosition2D position) const;
