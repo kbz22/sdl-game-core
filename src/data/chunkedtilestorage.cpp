@@ -103,7 +103,7 @@ std::optional<sgc::data::TileChunk> sgc::data::ChunkedTileStorage::RemoveChunkAt
 {
     auto it = m_chunks.find(chunkPosition);
     if (it != m_chunks.end()) {
-        TileChunk& chunk = it->second;
+        TileChunk chunk = it->second; // copy
         m_chunks.erase(it);        
         return chunk;
     }   
