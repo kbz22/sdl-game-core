@@ -12,7 +12,10 @@ namespace sgc::data {
             std::unordered_map<ChunkCoord, TileChunk> m_chunks;
 
         public:
+
             virtual std::optional<tile::TileId> GetTileAt(GridCoord position) const override;
+            virtual void GetTilesWithin(GridCoord boundStart, GridCoord boundEnd, std::vector<tile::Tile>& tileBuffer) const override;
+
             virtual void SetTileAt(GridCoord position, std::optional<tile::TileId> tileId) override;
 
             void SetChunkAt(ChunkCoord chunkPosition, tile::TileId tileId);

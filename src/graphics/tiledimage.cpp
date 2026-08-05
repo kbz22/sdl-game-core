@@ -53,7 +53,52 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
         std::ceil((camera.y + camera.h) / tileSize.y)
     );
 
-    for (sgc::math::ival y = startY; y < endY; ++y){
+    std::vector<sgc::tile::Tile> tileBuffer;
+
+    tileStorage.GetTilesWithin(
+        { startX, startY },
+        { endX, endY },
+        tileBuffer
+    );
+
+    for (const auto& tile : tileBuffer)
+    {
+        SDL_FRect srcRect = tileset.GetTileRect(tile.id);
+
+        sgc::math::fvec2 worldPosition{
+            static_cast<float>(tile.position.x) * tileSize.x,
+            static_cast<float>(tile.position.y) * tileSize.y
+        };
+
+        auto screenPosition = sgc::coordinates::WorldToScreen(
+            worldPosition,
+            context.view
+        );
+
+        auto screenBottomRight = sgc::coordinates::WorldToScreen(
+            {
+                worldPosition.x + tileSize.x,
+                worldPosition.y + tileSize.y
+            },
+            context.view
+        );
+
+        SDL_FRect dstRect{
+            screenPosition.x,
+            screenPosition.y,
+            screenBottomRight.x - screenPosition.x,
+            screenBottomRight.y - screenPosition.y
+        };
+
+        SDL_RenderTexture(
+            context.renderer,
+            tileset.GetTexture(),
+            &srcRect,
+            &dstRect
+        );
+    }
+
+    /* for (sgc::math::ival y = startY; y < endY; ++y){
         for (sgc::math::ival x = startX; x < endX; ++x){
 
             sgc::tile::TilePosition2D gridPos{x, y};
@@ -96,5 +141,5 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
                 &dstRect
             );
         }
-    }
+    } */
 }

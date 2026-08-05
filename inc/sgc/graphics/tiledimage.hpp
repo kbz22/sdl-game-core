@@ -4,15 +4,17 @@
 #include "sgc/graphics/rendercontext.hpp"
 #include "sgc/graphics/idrawable.hpp"
 #include "sgc/graphics/color.hpp"
+#include "sgc/tile/tile.hpp"
 
 #include <memory>
+#include <vector>
 
 namespace sgc::graphics {
 
     class TiledImage : public IDrawable {
 
         private:
-            std::shared_ptr<TiledLayer> m_layer;
+            std::shared_ptr<TiledLayer> m_layer;            
             uint8_t m_alpha{ 255 };
 
         public:

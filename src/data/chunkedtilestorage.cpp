@@ -20,6 +20,46 @@ std::optional<sgc::tile::TileId> sgc::data::ChunkedTileStorage::GetTileAt(GridCo
     return chunk.tiles[localY * TileChunk::Size + localX];
 }
 
+void sgc::data::ChunkedTileStorage::GetTilesWithin(GridCoord boundStart, GridCoord boundEnd, std::vector<sgc::tile::Tile>& tileBuffer) const
+{
+    using namespace sgc::math;
+
+    ChunkCoord chunkPos{
+        FloorDiv(boundStart.x, TileChunk::Size),
+        FloorDiv(boundStart.y, TileChunk::Size)
+    };
+
+    ChunkCoord chunkEndPos{
+        FloorDiv(boundEnd.x - 1, TileChunk::Size),
+        FloorDiv(boundEnd.y - 1, TileChunk::Size)
+    };
+
+    for (ival chunkY = chunkPos.y; chunkY <= chunkEndPos.y; ++chunkY) {
+        for(ival chunkX = chunkPos.x; chunkX <= chunkEndPos.x; ++chunkX) 
+        {
+            auto chunkIt = m_chunks.find({chunkX, chunkY});
+            if (chunkIt != m_chunks.end()) {
+                const TileChunk& chunk = chunkIt->second;
+                tileBuffer.reserve(tileBuffer.size() + (TileChunk::Size * TileChunk::Size));
+
+                ival startX = std::max(boundStart.x, chunkX * TileChunk::Size);
+                ival endX = std::min(boundEnd.x, (chunkX + 1) * TileChunk::Size);
+
+                ival startY = std::max(boundStart.y, chunkY * TileChunk::Size);
+                ival endY = std::min(boundEnd.y, (chunkY + 1) * TileChunk::Size);
+
+                for (ival y = startY; y < endY; ++y) {
+                    for (ival x = startX; x < endX; ++x) {
+                        auto localX = FloorMod(x, TileChunk::Size);
+                        auto localY = FloorMod(y, TileChunk::Size);
+                        tileBuffer.push_back({{x, y}, chunk.tiles[localY * TileChunk::Size + localX]});
+                    }
+                }
+            }
+        }
+    }    
+}
+
 void sgc::data::ChunkedTileStorage::SetTileAt(GridCoord position, std::optional<sgc::tile::TileId> tileId)
 {
     ChunkCoord chunkPos;
