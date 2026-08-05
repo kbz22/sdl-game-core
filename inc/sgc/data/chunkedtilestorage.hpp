@@ -22,7 +22,7 @@ namespace sgc::data {
             void SetChunkAt(ChunkCoord chunkPosition, const TileChunk& chunk);
             std::optional<TileChunk> RemoveChunkAt(ChunkCoord chunkPosition);
 
-            ChunkCoord GetChunkCoordAt(GridCoord position) const;
+            static ChunkCoord GetChunkCoordAt(GridCoord position);
 
             friend struct sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset>;            
     };

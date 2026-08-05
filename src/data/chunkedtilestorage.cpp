@@ -111,7 +111,7 @@ std::optional<sgc::data::TileChunk> sgc::data::ChunkedTileStorage::RemoveChunkAt
     return std::nullopt;
 }
 
-sgc::data::ChunkCoord sgc::data::ChunkedTileStorage::GetChunkCoordAt(GridCoord position) const
+sgc::data::ChunkCoord sgc::data::ChunkedTileStorage::GetChunkCoordAt(GridCoord position)
 {
     ChunkCoord chunkPos;
     chunkPos.x = sgc::math::FloorDiv(position.x, TileChunk::Size);
