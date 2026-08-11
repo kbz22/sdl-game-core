@@ -84,7 +84,7 @@ void sgc::graphics::LineGrid::Draw(const RenderContext& context)
         m_color.a
     );
     
-    for (sgc::math::uval x = 0; x <= m_size.x; x += m_cellSize.x)
+    for (sgc::math::ival x = 0; x <= m_size.x; x += m_cellSize.x)
     {
         auto worldStart = sgc::math::fvec2{
             static_cast<float>(m_position.x + x),
@@ -115,7 +115,7 @@ void sgc::graphics::LineGrid::Draw(const RenderContext& context)
         );
     }
     
-    for (sgc::math::uval y = 0; y <= m_size.y; y += m_cellSize.y)
+    for (sgc::math::ival y = 0; y <= m_size.y; y += m_cellSize.y)
     {
         auto worldStart = sgc::math::fvec2{
             static_cast<float>(m_position.x),
