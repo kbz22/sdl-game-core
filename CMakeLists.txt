@@ -7,35 +7,35 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Get SDL paths from environment variables
-set(SDL_INCLUDE_PATH $ENV{SDL_INCLUDE_PATH})
-set(SDL_LIB_PATH $ENV{SDL_LIB_PATH})
-set(SDL_IMAGE_INCLUDE_PATH $ENV{SDL_IMAGE_INCLUDE_PATH})
-set(SDL_IMAGE_LIB_PATH $ENV{SDL_IMAGE_LIB_PATH})
-set(SDL_TTF_INCLUDE_PATH $ENV{SDL_TTF_INCLUDE_PATH})
-set(SDL_TTF_LIB_PATH $ENV{SDL_TTF_LIB_PATH})
+set(SDL_INCLUDE_PATH "$ENV{SDL_INCLUDE_PATH}" CACHE PATH "Path to SDL include directory")
+set(SDL_LIB_PATH "$ENV{SDL_LIB_PATH}" CACHE PATH "Path to SDL library directory")
+set(SDL_IMAGE_INCLUDE_PATH "$ENV{SDL_IMAGE_INCLUDE_PATH}" CACHE PATH "Path to SDL_image include directory")
+set(SDL_IMAGE_LIB_PATH "$ENV{SDL_IMAGE_LIB_PATH}" CACHE PATH "Path to SDL_image library directory")
+set(SDL_TTF_INCLUDE_PATH "$ENV{SDL_TTF_INCLUDE_PATH}" CACHE PATH "Path to SDL_ttf include directory")
+set(SDL_TTF_LIB_PATH "$ENV{SDL_TTF_LIB_PATH}" CACHE PATH "Path to SDL_ttf library directory")
 
 if(NOT SDL_INCLUDE_PATH)
-    message(FATAL_ERROR "SDL_INCLUDE_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_INCLUDE_PATH not specified.")
 endif()
 
 if(NOT SDL_LIB_PATH)
-    message(FATAL_ERROR "SDL_LIB_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_LIB_PATH not specified.")
 endif()
 
 if(NOT SDL_IMAGE_INCLUDE_PATH)
-    message(FATAL_ERROR "SDL_IMAGE_INCLUDE_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_IMAGE_INCLUDE_PATH not specified.")
 endif()
 
 if(NOT SDL_IMAGE_LIB_PATH)
-    message(FATAL_ERROR "SDL_IMAGE_LIB_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_IMAGE_LIB_PATH not specified.")
 endif()
 
 if(NOT SDL_TTF_INCLUDE_PATH)
-    message(FATAL_ERROR "SDL_TTF_INCLUDE_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_TTF_INCLUDE_PATH not specified.")
 endif()
 
 if(NOT SDL_TTF_LIB_PATH)
-    message(FATAL_ERROR "SDL_TTF_LIB_PATH environment variable is not set")
+    message(FATAL_ERROR "SDL_TTF_LIB_PATH not specified.")
 endif()
 
 add_library(sdl-game-core STATIC
@@ -79,6 +79,8 @@ add_library(sdl-game-core STATIC
     src/sdl/sdl_win32.cpp
 
     src/coordinates/screenworld.cpp
+
+    src/math/vector.cpp
 )
 
 option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)

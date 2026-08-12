@@ -15,3 +15,13 @@ sgc::math::fvec2 sgc::coordinates::WorldToScreen(sgc::math::fvec2 position, cons
         (position.y - view.camera.y) * view.screen.h / view.camera.h + view.screen.y
     };
 }
+
+float sgc::coordinates::ScreenToWorld(float value, const graphics::View view)
+{
+    return (value - view.screen.x) * view.camera.w / view.screen.w + view.camera.x;
+}
+
+float sgc::coordinates::WorldToScreen(float value, const graphics::View view)
+{
+    return (value - view.camera.x) * view.screen.w / view.camera.w + view.screen.x;
+}

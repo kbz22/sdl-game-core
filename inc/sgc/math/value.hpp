@@ -30,4 +30,10 @@ namespace sgc::math {
         return ((value % mod) + mod) % mod;
     }
 
+    template<typename T>
+    constexpr T Sign(T value)
+    {
+        return (T(0) < value) - (value < T(0));
+    }
+
 }
