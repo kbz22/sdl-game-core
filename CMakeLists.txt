@@ -71,9 +71,10 @@ add_library(sdl-game-core STATIC
     src/graphics/tiledimage.cpp
     src/graphics/tiledlayer.cpp
     src/graphics/linegrid.cpp
-    src/graphics/multilayeredtiledimage.cpp
-    src/graphics/renderlayer.cpp
+    src/graphics/multilayeredtiledimage.cpp    
     src/graphics/line.cpp
+    src/graphics/drawablecontainer.cpp
+    src/graphics/drawablelayers.cpp
 
     src/sdl/sdl.cpp
     src/sdl/sdl_win32.cpp
