@@ -17,6 +17,7 @@ namespace sgc::graphics {
             std::shared_ptr<TiledLayer> m_layer;
             uint8_t m_alpha{ 255 };
             sgc::math::fvec2 m_position{ 0.0f, 0.0f };
+            sgc::tile::TilePosition2D m_tilePosition{ 0, 0 };
 
         public:
             TiledImage(std::shared_ptr<TiledLayer> layer);

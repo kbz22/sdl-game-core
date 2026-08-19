@@ -2,6 +2,8 @@
 #include "sgc/tile/tile.hpp"
 #include "sgc/coordinates/screenworld.hpp"
 
+#include <algorithm>
+
 sgc::graphics::TiledImage::TiledImage(std::shared_ptr<TiledLayer> layer) :
     m_layer(layer)
 {
@@ -19,14 +21,27 @@ void sgc::graphics::TiledImage::SetAlpha(uint8_t alpha)
 
 void sgc::graphics::TiledImage::SetPositionPixels(sgc::math::fvec2 position)
 {
+    auto tileSize = m_layer->GetTileset().GetTileSize();
+    
     m_position = position;
+    m_tilePosition = {
+        static_cast<int>(std::floor(position.x / tileSize.x)),
+        static_cast<int>(std::floor(position.y / tileSize.y))
+    };
 }
 
 void sgc::graphics::TiledImage::SetPositionPixels(sgc::graphics::PixelPosition2D position)
 {
+    auto tileSize = m_layer->GetTileset().GetTileSize();
+
     m_position = {
         static_cast<float>(position.x),
         static_cast<float>(position.y)
+    };
+
+    m_tilePosition = {
+        static_cast<int>(std::floor(position.x / tileSize.x)),
+        static_cast<int>(std::floor(position.y / tileSize.y))
     };
 }
 
@@ -69,8 +84,8 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
     std::vector<sgc::tile::Tile> tileBuffer;
 
     tileStorage.GetTilesWithin(
-        { startX, startY },
-        { endX, endY },
+        { startX - m_tilePosition.x, startY - m_tilePosition.y },
+        { endX - m_tilePosition.x, endY - m_tilePosition.y },
         tileBuffer
     );
 
