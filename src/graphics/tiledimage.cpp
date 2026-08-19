@@ -17,6 +17,19 @@ void sgc::graphics::TiledImage::SetAlpha(uint8_t alpha)
     m_alpha = alpha;
 }
 
+void sgc::graphics::TiledImage::SetPositionPixels(sgc::math::fvec2 position)
+{
+    m_position = position;
+}
+
+void sgc::graphics::TiledImage::SetPositionPixels(sgc::graphics::PixelPosition2D position)
+{
+    m_position = {
+        static_cast<float>(position.x),
+        static_cast<float>(position.y)
+    };
+}
+
 void sgc::graphics::TiledImage::Draw(RenderContext const& context)
 {
     if (!m_layer || !context.renderer) {
@@ -69,8 +82,8 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
         SDL_FRect srcRect = tileset.GetTileRect(tile.id);
 
         sgc::math::fvec2 worldPosition{
-            static_cast<float>(tile.position.x) * tileSize.x,
-            static_cast<float>(tile.position.y) * tileSize.y
+            static_cast<float>(tile.position.x) * tileSize.x + m_position.x,
+            static_cast<float>(tile.position.y) * tileSize.y + m_position.y
         };
 
         auto screenPosition = sgc::coordinates::WorldToScreen(
@@ -100,49 +113,4 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
             &dstRect
         );
     }
-
-    /* for (sgc::math::ival y = startY; y < endY; ++y){
-        for (sgc::math::ival x = startX; x < endX; ++x){
-
-            sgc::tile::TilePosition2D gridPos{x, y};
-
-            auto tileIdOpt = tileStorage.GetTileAt(gridPos);
-
-            if (!tileIdOpt.has_value())
-                continue;
-
-            SDL_FRect srcRect = tileset.GetTileRect(tileIdOpt.value());
-            
-            sgc::math::fvec2 worldPosition{
-                static_cast<float>(x * tileSize.x),
-                static_cast<float>(y * tileSize.y)
-            };
-
-            auto screenPosition = sgc::coordinates::WorldToScreen(
-                worldPosition,
-                context.view
-            );
-
-            auto screenBottomRight = sgc::coordinates::WorldToScreen({
-                worldPosition.x + tileSize.x,
-                worldPosition.y + tileSize.y
-                },
-                context.view
-            );
-
-            SDL_FRect dstRect{
-                screenPosition.x,
-                screenPosition.y,
-                screenBottomRight.x - screenPosition.x,
-                screenBottomRight.y - screenPosition.y
-            };
-
-            SDL_RenderTexture(
-                context.renderer,
-                tileset.GetTexture(),
-                &srcRect,
-                &dstRect
-            );
-        }
-    } */
 }
