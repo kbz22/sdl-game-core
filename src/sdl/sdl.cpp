@@ -31,9 +31,14 @@ SDL_Window* sgc::sdl::CreateWindow(const char* title, int width, int height, SDL
 
 SDL_Renderer* sgc::sdl::CreateRenderer(SDL_Window* window)
 {
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);    
+
     if (!renderer) {
         debug::log(debug::LogMessage("Failed to create renderer: " + std::string(SDL_GetError())));
+    }
+    else {
+        auto name = SDL_GetRendererName(renderer);
+        debug::log(debug::LogMessage("SDL renderer:" + std::string(name)));
     }
 
     return renderer;
