@@ -78,7 +78,7 @@ void sgc::sdl::Render(graphics::RenderContext const& context)
     SDL_RenderPresent(context.renderer);
 }
 
-void sgc::sdl::RenderAsImage(std::filesystem::path const& imagePath, graphics::RenderContext const& context)
+void sgc::sdl::RenderAsImage(std::filesystem::path const& imagePath, graphics::RenderContext const& context, std::function<void(graphics::RenderContext const&)> renderFunction)
 {
     if (!context.renderer) {
         return;
@@ -96,10 +96,12 @@ void sgc::sdl::RenderAsImage(std::filesystem::path const& imagePath, graphics::R
     );
 
     SDL_SetRenderTarget(context.renderer, targetTexture);
-    Render(context);
-    SDL_SetRenderTarget(context.renderer, nullptr);
+    renderFunction(context);
 
     SDL_Surface* surface = SDL_RenderReadPixels(context.renderer, nullptr);
+
+    SDL_SetRenderTarget(context.renderer, nullptr);
+
     IMG_SavePNG(surface, imagePath.string().c_str());
     SDL_DestroyTexture(targetTexture);
     SDL_DestroySurface(surface);

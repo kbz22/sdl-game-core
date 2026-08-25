@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 #include <filesystem>
+#include <functional>
 
 #include "sgc/math/vector.hpp"
 #include "sgc/graphics/color.hpp"
@@ -25,7 +26,7 @@ namespace sgc::sdl {
 
     void Render(graphics::RenderContext const& context);
 
-    void RenderAsImage(std::filesystem::path const& imagePath, graphics::RenderContext const& context);
+    void RenderAsImage(std::filesystem::path const &imagePath, graphics::RenderContext const &context, std::function<void(graphics::RenderContext const&)> renderFunction);
 
     // void PollEvents(messaging::MessageQueue& messageQueue);
 
