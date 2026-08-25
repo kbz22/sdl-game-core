@@ -3,6 +3,7 @@
 #include "sgc/debug/log.hpp"
 
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 
 bool sgc::sdl::InitVideo()
 {
@@ -75,6 +76,33 @@ void sgc::sdl::Render(graphics::RenderContext const& context)
     }
 
     SDL_RenderPresent(context.renderer);
+}
+
+void sgc::sdl::RenderAsImage(std::filesystem::path const& imagePath, graphics::RenderContext const& context)
+{
+    if (!context.renderer) {
+        return;
+    }
+
+    auto mapWidthPixels = static_cast<int>(context.view.camera.w);
+    auto mapHeightPixels = static_cast<int>(context.view.camera.h);
+
+    SDL_Texture* targetTexture = SDL_CreateTexture(
+        context.renderer,
+        SDL_PIXELFORMAT_RGBA8888,
+        SDL_TEXTUREACCESS_TARGET,
+        mapWidthPixels,
+        mapHeightPixels
+    );
+
+    SDL_SetRenderTarget(context.renderer, targetTexture);
+    Render(context);
+    SDL_SetRenderTarget(context.renderer, nullptr);
+
+    SDL_Surface* surface = SDL_RenderReadPixels(context.renderer, nullptr);
+    IMG_SavePNG(surface, imagePath.string().c_str());
+    SDL_DestroyTexture(targetTexture);
+    SDL_DestroySurface(surface);
 }
 
 /* void sgc::sdl::PollEvents(messaging::MessageQueue& messageQueue)

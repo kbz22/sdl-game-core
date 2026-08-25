@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include <filesystem>
 
 #include "sgc/math/vector.hpp"
 #include "sgc/graphics/color.hpp"
@@ -22,7 +23,9 @@ namespace sgc::sdl {
 
     void Clear(graphics::RenderContext const& context, graphics::color color);
 
-    void Render(graphics::RenderContext const& context);    
+    void Render(graphics::RenderContext const& context);
+
+    void RenderAsImage(std::filesystem::path const& imagePath, graphics::RenderContext const& context);
 
     // void PollEvents(messaging::MessageQueue& messageQueue);
 
