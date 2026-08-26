@@ -84,8 +84,8 @@ void sgc::sdl::RenderAsImage(std::filesystem::path const& imagePath, graphics::R
         return;
     }
 
-    auto mapWidthPixels = static_cast<int>(context.view.camera.w);
-    auto mapHeightPixels = static_cast<int>(context.view.camera.h);
+    auto mapWidthPixels = static_cast<int>(context.view.screen.w);
+    auto mapHeightPixels = static_cast<int>(context.view.screen.h);
 
     SDL_Texture* targetTexture = SDL_CreateTexture(
         context.renderer,
