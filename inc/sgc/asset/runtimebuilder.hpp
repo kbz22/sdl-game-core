@@ -2,7 +2,7 @@
 
 namespace sgc::asset {
 
-    template<typename AssetType>
+    template<typename RuntimeType>
     struct RuntimeBuilder;
 
 }

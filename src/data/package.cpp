@@ -3,40 +3,73 @@
 
 bool sgc::data::Package::Open(const std::filesystem::path& path)
 {
-    m_stream.open(path, std::ios::binary);
+    std::ifstream stream(path, std::ios::binary);
 
-    if (!m_stream.is_open())
+    if (!stream.is_open())
         return false;
 
-    m_stream.seekg(0, std::ios::end);
-    m_fileSize = static_cast<size_t>(m_stream.tellg());
+    stream.seekg(0, std::ios::end);
+    m_fileSize = static_cast<size_t>(stream.tellg());
 
-    m_stream.seekg(0, std::ios::beg);
+    stream.seekg(0, std::ios::beg);
 
     if (m_fileSize == 0)
         return false;
 
     PackageHeader header;
-    m_stream.read(reinterpret_cast<char*>(&header), sizeof(header));
+    stream.read(reinterpret_cast<char*>(&header), sizeof(header));
 
-    if (header.magic[0] != 'S' ||
-        header.magic[1] != 'G' ||
-        header.magic[2] != 'C' ||
-        header.magic[3] != 'P')
-        return false;
+    for (int i = 0; i < c_packageMagicSize; ++i) {
+        if (header.magic[i] != c_packageMagic[i])
+            return false;
+    }
 
     m_dataOffset = header.dataOffset;
 
     // Read table
-    m_stream.seekg(header.tableOffset);
+    stream.seekg(header.tableOffset);
 
     for (uint32_t i = 0; i < header.assetCount; i++)
     {
         PackageEntry entry;
-        m_stream.read(reinterpret_cast<char*>(&entry), sizeof(entry));
+        stream.read(reinterpret_cast<char*>(&entry), sizeof(entry));
 
         m_entries[entry.id] = entry;
     }
+
+    return true;
+}
+
+bool sgc::data::Package::Open(std::span<uint8_t> data)
+{
+    PackageHeader header;
+
+    if(data.size() < sizeof(header))
+        return false;
+
+    std::memcpy(&header, data.data(), sizeof(header));
+
+    for (int i = 0; i < c_packageMagicSize; ++i) {
+        if (header.magic[i] != c_packageMagic[i])
+            return false;
+    }
+
+    m_dataOffset = header.dataOffset;
+
+    if(data.size() < sizeof(header) + header.assetCount * sizeof(PackageEntry))
+        return false;
+
+    for (uint32_t i = 0; i < header.assetCount; i++)
+    {
+        PackageEntry entry;       
+
+        std::memcpy(&entry, data.data() + header.tableOffset + i * sizeof(entry), sizeof(entry));
+
+        m_entries[entry.id] = entry;        
+    }
+
+    m_data = std::vector<uint8_t>(data.begin() + m_dataOffset, data.end());
+    m_fileSize = data.size();
 
     return true;
 }
@@ -54,8 +87,9 @@ std::vector<uint8_t> sgc::data::Package::ReadAssetData(AssetId id) const
     if (entry.offset + entry.size > m_fileSize)
         return {};
 
-    m_stream.seekg(entry.offset);
-    m_stream.read(reinterpret_cast<char*>(data.data()), entry.size);
+    /* stream.seekg(entry.offset);
+    stream.read(reinterpret_cast<char*>(data.data()), entry.size); */
+    std::memcpy(data.data(), m_data.data() + entry.offset, entry.size);
 
     return data;
 }

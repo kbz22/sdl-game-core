@@ -1,7 +1,7 @@
-#include "sgc/asset/chunkedtilestorageassetbuilder.hpp"
+#include "sgc/asset/chunkedtilestorageasset.hpp"
 #include "sgc/data/chunkedtilestorage.hpp"
 
-sgc::asset::ChunkedTileStorageAsset sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset>::Build(const sgc::data::ChunkedTileStorage &storage)
+sgc::asset::ChunkedTileStorageAsset sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset, sgc::data::ChunkedTileStorage>::Build(const sgc::data::ChunkedTileStorage &storage)
 {
     ChunkedTileStorageAsset asset;
 

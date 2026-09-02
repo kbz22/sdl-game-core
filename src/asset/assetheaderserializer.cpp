@@ -1,4 +1,4 @@
-#include "sgc/asset/assetheaderserializer.hpp"
+#include "sgc/asset/assetheader.hpp"
 #include "sgc/data/serialization.hpp"
 
 std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::data::AssetHeader>::Serialize(const AssetHeader &asset)

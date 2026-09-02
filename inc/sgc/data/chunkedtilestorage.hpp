@@ -2,7 +2,7 @@
 
 #include "sgc/data/itilestorage.hpp"
 #include "sgc/data/tilechunk.hpp"
-#include "sgc/asset/chunkedtilestorageassetbuilder.hpp"
+#include "sgc/asset/chunkedtilestorageasset.hpp"
 #include <optional>
 
 namespace sgc::data {        
@@ -24,7 +24,7 @@ namespace sgc::data {
 
             static ChunkCoord GetChunkCoordAt(GridCoord position);
 
-            friend struct sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset>;            
+            friend struct sgc::asset::AssetBuilder<sgc::asset::ChunkedTileStorageAsset, sgc::data::ChunkedTileStorage>;            
     };
 
 }    

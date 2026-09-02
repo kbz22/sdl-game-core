@@ -1,4 +1,4 @@
-#include "sgc/asset/tilesetassetserializer.hpp"
+#include "sgc/asset/tilesetasset.hpp"
 #include "sgc/data/serialization.hpp"
 #include <string>
 

@@ -1,5 +1,6 @@
 #include "sgc/data/packagebuilder.hpp"
 #include "sgc/data/package.hpp"
+#include "sgc/asset/assetheader.hpp"
 #include <fstream>
 
 void sgc::data::PackageBuilder::AddAsset(
@@ -7,7 +8,7 @@ void sgc::data::PackageBuilder::AddAsset(
     AssetType type,
     const std::vector<uint8_t>& data)
 {
-    m_assets.push_back({ { id, type }, data });
+    m_assets.push_back({ { id, type, data.size() }, data });
 }
 
 void sgc::data::PackageBuilder::AddAsset(
@@ -33,14 +34,14 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     header.assetCount = static_cast<uint32_t>(m_assets.size());
 
     header.tableOffset = sizeof(PackageHeader);
-    header.dataOffset = 0; // we'll compute later
+    header.dataOffset = 0;
 
     //! placeholder header
     out.write(reinterpret_cast<char*>(&header), sizeof(header));
 
     std::vector<PackageEntry> entries;
 
-    uint32_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    size_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
 
     header.dataOffset = offset;
 
@@ -70,4 +71,53 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     }
 
     return true;
+}
+
+std::vector<uint8_t> sgc::data::PackageBuilder::Build()
+{        
+    PackageHeader header{};
+    std::memcpy(header.magic, sgc::data::c_packageMagic, sgc::data::c_packageMagicSize);
+    header.version = 1;
+    header.assetCount = static_cast<uint32_t>(m_assets.size());
+    header.tableOffset = sizeof(PackageHeader);
+
+    size_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    header.dataOffset = offset;
+
+    std::vector<uint8_t> data;    
+    data.insert(
+        data.end(),
+        reinterpret_cast<uint8_t*>(&header),
+        reinterpret_cast<uint8_t*>(&header) + sizeof(PackageHeader)
+    );
+    
+    for (auto& a : m_assets) // table
+    {
+        PackageEntry e{};
+        e.id = a.header.id;
+        e.type = a.header.type;
+        e.offset = offset;
+        e.size = a.data.size();
+
+        data.insert(
+            data.end(),
+            reinterpret_cast<uint8_t*>(&e),
+            reinterpret_cast<uint8_t*>(&e) + sizeof(PackageEntry)
+        );
+
+        offset += e.size;
+    }
+
+    for (auto& a : m_assets) // data
+    {
+        data.insert(
+            data.end(),
+            a.data.begin(),
+            a.data.end()
+        );
+    }
+
+    return data;
+
+
 }

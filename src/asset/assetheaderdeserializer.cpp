@@ -1,4 +1,4 @@
-#include "sgc/asset/assetheaderdeserializer.hpp"
+#include "sgc/asset/assetheader.hpp"
 #include "sgc/data/resourcecontext.hpp"
 #include "sgc/data/serialization.hpp"
 

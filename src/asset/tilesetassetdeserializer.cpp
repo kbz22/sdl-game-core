@@ -1,4 +1,4 @@
-#include "sgc/asset/tilesetassetdeserializer.hpp"
+#include "sgc/asset/tilesetasset.hpp"
 
 sgc::asset::TilesetAsset sgc::asset::AssetDeserializer<sgc::asset::TilesetAsset>::Deserialize(const std::vector<uint8_t> &data)
 {

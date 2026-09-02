@@ -1,4 +1,4 @@
-#include "sgc/asset/imageassetdeserializer.hpp"
+#include "sgc/asset/imageasset.hpp"
 
 sgc::asset::ImageAsset sgc::asset::AssetDeserializer<sgc::asset::ImageAsset>::Deserialize(const std::vector<uint8_t> &data)
 {

@@ -42,7 +42,7 @@ namespace sgc::data {
         const auto data = m_package->ReadAssetData(id);
 
         // Let the loader create the object
-        std::shared_ptr<T> resource = sgc::asset::AssetDeserializer<T>::Load(data, context);
+        std::shared_ptr<T> resource = sgc::asset::AssetDeserializer<T>::Deserialize(data);
 
         // Store in cache
         m_cache[id] = resource;

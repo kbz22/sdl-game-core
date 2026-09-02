@@ -1,4 +1,5 @@
-#include "sgc/asset/chunkedtilestoragebuilder.hpp"
+#include "sgc/asset/chunkedtilestorageasset.hpp"
+#include "sgc/data/chunkedtilestorage.hpp"
 
 std::shared_ptr<sgc::data::ChunkedTileStorage> sgc::asset::RuntimeBuilder<sgc::data::ChunkedTileStorage>::Build(const ChunkedTileStorageAsset& asset)
 {

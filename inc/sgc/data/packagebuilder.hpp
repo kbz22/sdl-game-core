@@ -8,21 +8,22 @@ namespace sgc::data {
 
     class PackageBuilder
     {
-    public:
-        void AddAsset(
-            AssetId id,
-            AssetType type,
-            const std::vector<uint8_t>& data
-        );
+        private:
+            std::vector<BinaryAsset> m_assets;
 
-        void AddAsset(
-            BinaryAsset asset
-        );
+        public:
+            void AddAsset(
+                AssetId id,
+                AssetType type,
+                const std::vector<uint8_t>& data
+            );
 
-        bool Save(const std::filesystem::path& path);
+            void AddAsset(
+                BinaryAsset asset
+            );
 
-    private:
-        std::vector<BinaryAsset> m_assets;
+            bool Save(const std::filesystem::path& path);
+            std::vector<uint8_t> Build();
     };
 
 }
