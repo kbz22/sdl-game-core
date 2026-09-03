@@ -37,6 +37,16 @@ bool sgc::data::Package::Open(const std::filesystem::path& path)
         m_entries[entry.id] = entry;
     }
 
+    if (m_dataOffset > m_fileSize)
+        return false;
+
+    stream.seekg(static_cast<std::streamoff>(m_dataOffset), std::ios::beg);
+    m_data.resize(m_fileSize - m_dataOffset);
+    stream.read(reinterpret_cast<char*>(m_data.data()), static_cast<std::streamsize>(m_data.size()));
+
+    if (!stream && !stream.eof())
+        return false;
+
     return true;
 }
 
