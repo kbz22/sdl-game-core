@@ -8,14 +8,16 @@ void sgc::data::PackageBuilder::AddAsset(
     AssetType type,
     const std::vector<uint8_t>& data)
 {
-    m_assets.push_back({ { id, type, data.size() }, data });
+    // m_assets.push_back({ { id, type, data.size() }, data });
+    m_assetMap[id] = { { id, type, data.size() }, data };
 }
 
 void sgc::data::PackageBuilder::AddAsset(
     BinaryAsset asset
 )
 {
-    m_assets.push_back(asset);
+    // m_assets.push_back(asset);
+    m_assetMap[asset.header.id] = asset;
 }
 
 bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
@@ -31,14 +33,14 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     header.magic[2] = 'C';
     header.magic[3] = 'P';
     header.version = 1;
-    header.assetCount = static_cast<uint32_t>(m_assets.size());
+    header.assetCount = static_cast<uint32_t>(m_assetMap.size());
 
     header.tableOffset = sizeof(PackageHeader);
     header.dataOffset = 0;    
 
     std::vector<PackageEntry> entries;
 
-    size_t dataOffset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    size_t dataOffset = sizeof(PackageHeader) + m_assetMap.size() * sizeof(PackageEntry);
     header.dataOffset = dataOffset;
 
     out.write(reinterpret_cast<char*>(&header), sizeof(header));
@@ -46,7 +48,8 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     size_t offset = 0;
 
     // write table + data
-    for (auto& a : m_assets)
+    // for (auto& a : m_assets)
+    for (auto& [id, a] : m_assetMap)
     {
         PackageEntry e{};
         e.id = a.header.id;
@@ -64,7 +67,8 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
               entries.size() * sizeof(PackageEntry));
 
     // write asset data
-    for (auto& a : m_assets)
+    // for (auto& a : m_assets)
+    for (auto& [id, a] : m_assetMap)
     {
         out.write(reinterpret_cast<char*>(a.data.data()),
                   a.data.size());
@@ -78,10 +82,10 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
     PackageHeader header{};
     std::memcpy(header.magic, sgc::data::c_packageMagic, sgc::data::c_packageMagicSize);
     header.version = 1;
-    header.assetCount = static_cast<uint32_t>(m_assets.size());
+    header.assetCount = static_cast<uint32_t>(m_assetMap.size());
     header.tableOffset = sizeof(PackageHeader);
 
-    size_t dataOffset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    size_t dataOffset = sizeof(PackageHeader) + m_assetMap.size() * sizeof(PackageEntry);
     header.dataOffset = dataOffset;
 
     std::vector<uint8_t> data;    
@@ -93,7 +97,7 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
 
     size_t offset = 0;
     
-    for (auto& a : m_assets) // table
+    for (auto& [id, a] : m_assetMap) // table
     {
         PackageEntry e{};
         e.id = a.header.id;
@@ -110,7 +114,7 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
         offset += e.size;
     }
 
-    for (auto& a : m_assets) // data
+    for (auto& [id, a] : m_assetMap) // data
     {
         data.insert(
             data.end(),

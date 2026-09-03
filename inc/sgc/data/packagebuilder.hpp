@@ -3,13 +3,15 @@
 #include "sgc/data/asset.hpp"
 #include <vector>
 #include <filesystem>
+#include <unordered_map>
 
 namespace sgc::data {
 
     class PackageBuilder
     {
         private:
-            std::vector<BinaryAsset> m_assets;
+            // std::vector<BinaryAsset> m_assets;
+            std::unordered_map<AssetId, BinaryAsset> m_assetMap;
 
         public:
             void AddAsset(
