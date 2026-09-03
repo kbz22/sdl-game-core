@@ -1,6 +1,7 @@
 #include "sgc/asset/mapasset.hpp"
 #include "sgc/data/serialization.hpp"
 #include <stdexcept>
+#include <memory>
 
 std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serialize(const MapAsset &asset)
 {
@@ -34,5 +35,5 @@ std::vector<uint8_t> sgc::asset::AssetSerializer<sgc::asset::MapAsset>::Serializ
         }        
     }    
 
-    return writer.buffer;
+    return std::move(writer.buffer);
 }

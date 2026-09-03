@@ -34,16 +34,16 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     header.assetCount = static_cast<uint32_t>(m_assets.size());
 
     header.tableOffset = sizeof(PackageHeader);
-    header.dataOffset = 0;
-
-    //! placeholder header
-    out.write(reinterpret_cast<char*>(&header), sizeof(header));
+    header.dataOffset = 0;    
 
     std::vector<PackageEntry> entries;
 
-    size_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    size_t dataOffset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    header.dataOffset = dataOffset;
 
-    header.dataOffset = offset;
+    out.write(reinterpret_cast<char*>(&header), sizeof(header));
+
+    size_t offset = 0;
 
     // write table + data
     for (auto& a : m_assets)
@@ -81,8 +81,8 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
     header.assetCount = static_cast<uint32_t>(m_assets.size());
     header.tableOffset = sizeof(PackageHeader);
 
-    size_t offset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
-    header.dataOffset = offset;
+    size_t dataOffset = sizeof(PackageHeader) + m_assets.size() * sizeof(PackageEntry);
+    header.dataOffset = dataOffset;
 
     std::vector<uint8_t> data;    
     data.insert(
@@ -90,6 +90,8 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
         reinterpret_cast<uint8_t*>(&header),
         reinterpret_cast<uint8_t*>(&header) + sizeof(PackageHeader)
     );
+
+    size_t offset = 0;
     
     for (auto& a : m_assets) // table
     {
@@ -118,6 +120,4 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
     }
 
     return data;
-
-
 }

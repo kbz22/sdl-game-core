@@ -82,14 +82,19 @@ std::vector<uint8_t> sgc::data::Package::ReadAssetData(AssetId id) const
 
     const PackageEntry& entry = it->second;
 
-    std::vector<uint8_t> data(entry.size);
+    std::vector<uint8_t> data;
 
     if (entry.offset + entry.size > m_fileSize)
         return {};
 
     /* stream.seekg(entry.offset);
     stream.read(reinterpret_cast<char*>(data.data()), entry.size); */
-    std::memcpy(data.data(), m_data.data() + entry.offset, entry.size);
+    // std::memcpy(data.data(), m_data.data() + entry.offset, entry.size);
+    data.insert(
+        data.begin(),
+        m_data.data() + entry.offset,
+        m_data.data() + entry.offset + entry.size
+    );
 
     return data;
 }
