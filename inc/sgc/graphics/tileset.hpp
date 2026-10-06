@@ -33,6 +33,8 @@ namespace sgc::graphics {
             tile::TileId ToTileId(tile::TilePosition2D position) const;
             tile::TileId ToTileId(math::uval x, math::uval y) const;
 
+            tile::TilePosition2D ToTilePosition(tile::TileId tileId) const;            
+
             friend class Sprite;           
 
     };

@@ -70,3 +70,11 @@ sgc::tile::TileId sgc::graphics::Tileset::ToTileId(tile::TilePosition2D position
 {
     return ToTileId(position.x, position.y);
 }
+
+sgc::tile::TilePosition2D sgc::graphics::Tileset::ToTilePosition(tile::TileId tileId) const
+{
+    return {
+        static_cast<math::ival>(tileId % m_gridSize.x),
+        static_cast<math::ival>(tileId / m_gridSize.x)
+    };
+}
