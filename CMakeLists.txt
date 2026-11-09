@@ -82,6 +82,9 @@ add_library(sdl-game-core STATIC
     src/coordinates/screenworld.cpp
 
     src/math/vector.cpp
+
+    src/messaging/eventbus.cpp
+    src/messaging/event.cpp
 )
 
 option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)
