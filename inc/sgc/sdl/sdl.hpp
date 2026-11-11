@@ -4,9 +4,9 @@
 #include <filesystem>
 #include <functional>
 
-#include "sgc/math/vector.hpp"
 #include "sgc/graphics/color.hpp"
 #include "sgc/graphics/rendercontext.hpp"
+#include "sgc/messaging/eventbus.hpp"
 
 namespace sgc::sdl {
 
@@ -28,6 +28,6 @@ namespace sgc::sdl {
 
     void RenderAsImage(std::filesystem::path const &imagePath, graphics::RenderContext const &context, std::function<void(graphics::RenderContext const&)> renderFunction);
 
-    // void PollEvents(messaging::MessageQueue& messageQueue);
+    void PollSdlEvents(sgc::messaging::EventBus &bus);
 
 }
