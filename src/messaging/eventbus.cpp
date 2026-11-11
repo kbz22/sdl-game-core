@@ -25,6 +25,12 @@ inline void Subscription::reset()
     m_bus = nullptr;
 }
 
+TypeId EventBus::NextTypeId()
+{
+    static TypeId count = 0;
+    return count++;
+}
+
 void EventBus::Unsubscribe(TypeId type, SubscriptionId id)
 {
     if(type < m_channels.size())

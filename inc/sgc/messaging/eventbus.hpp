@@ -100,11 +100,12 @@ namespace sgc::messaging
                 }
             };
 
+            static TypeId NextTypeId();
+
             template<Event E>
             static TypeId GetTypeId()
             {
-                static TypeId idCount = 0;
-                static const TypeId id = idCount++;
+                static const TypeId id = NextTypeId();
                 return id;
             }
 
@@ -161,7 +162,7 @@ namespace sgc::messaging
             void Flush();
         
             friend class Subscription;
-        };
+    };
 
-        EventBus& GetEventBus();
+    EventBus& GetEventBus();
 }
