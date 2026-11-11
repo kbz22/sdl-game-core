@@ -18,9 +18,9 @@ namespace sgc::graphics {
             tile::TileId m_tilesetPosition{ 0 };
 
         public:
-            Sprite(std::shared_ptr<Tileset> tileset, tile::TilesetPosition2D gridPosition);            
+            Sprite(std::shared_ptr<Tileset> tileset, tile::TilePosition2D gridPosition);            
 
-            void SetTilesetPosition(tile::TilesetPosition2D gridPosition);
+            void SetTilesetPosition(tile::TilePosition2D gridPosition);
             void SetTilesetPosition(tile::TileId tileId);
             void SetPositionPx(PixelPosition2D position);
 

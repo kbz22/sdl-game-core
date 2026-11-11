@@ -28,10 +28,9 @@ namespace sgc::graphics {
             tile::TileId TileIdCount() const;
             
             bool IsDrawableTileId(tile::TileId tileId) const;
-
-            tile::TileId ToTileId(tile::TilesetPosition2D position) const;
+            
             tile::TileId ToTileId(tile::TilePosition2D position) const;
-            tile::TileId ToTileId(math::uval x, math::uval y) const;
+            tile::TileId ToTileId(math::ival x, math::ival y) const;
 
             tile::TilePosition2D ToTilePosition(tile::TileId tileId) const;            
 

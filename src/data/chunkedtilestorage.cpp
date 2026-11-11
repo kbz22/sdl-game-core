@@ -52,7 +52,7 @@ void sgc::data::ChunkedTileStorage::GetTilesWithin(GridCoord boundStart, GridCoo
                     for (ival x = startX; x < endX; ++x) {
                         auto localX = FloorMod(x, TileChunk::Size);
                         auto localY = FloorMod(y, TileChunk::Size);
-                        tileBuffer.push_back({{x, y}, chunk.tiles[localY * TileChunk::Size + localX]});
+                        tileBuffer.push_back({tile::TilePosition2D{x, y}, chunk.tiles[localY * TileChunk::Size + localX]});
                     }
                 }
             }

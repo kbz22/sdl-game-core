@@ -28,7 +28,7 @@ void sgc::data::StaticTileStorage::GetTilesWithin(GridCoord boundStart, GridCoor
         for (sgc::math::ival x = boundStart.x; x < boundEnd.x; ++x) {
             if (x >= 0 && x < sizeX && y >= 0 && y < sizeY) {
                 auto tileId = m_tiles[y * sizeX + x];
-                tileBuffer.push_back({{x, y}, tileId});
+                tileBuffer.push_back({tile::TilePosition2D{x, y}, tileId});
             }
         }
     }

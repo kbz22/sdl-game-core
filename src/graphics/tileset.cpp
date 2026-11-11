@@ -11,7 +11,7 @@ sgc::graphics::Tileset::Tileset(std::shared_ptr<Image> image, graphics::PixelSiz
 
 SDL_FRect sgc::graphics::Tileset::GetTileRect(tile::TileId id) const
 {
-    const tile::TilesetPosition2D tilePosition{
+    const tile::TilePosition2D tilePosition{
         id % m_gridSize.x,
         id / m_gridSize.x
     };
@@ -56,14 +56,9 @@ bool sgc::graphics::Tileset::IsDrawableTileId(tile::TileId tileId) const
     return tileId < (m_gridSize.x * m_gridSize.y);
 }
 
-sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::uval x, math::uval y) const
+sgc::tile::TileId sgc::graphics::Tileset::ToTileId(math::ival x, math::ival y) const
 {
     return static_cast<tile::TileId>(y * m_gridSize.x + x);
-}
-
-sgc::tile::TileId sgc::graphics::Tileset::ToTileId(tile::TilesetPosition2D position) const
-{
-    return ToTileId(static_cast<math::uval>(position.x), static_cast<math::uval>(position.y));
 }
 
 sgc::tile::TileId sgc::graphics::Tileset::ToTileId(tile::TilePosition2D position) const

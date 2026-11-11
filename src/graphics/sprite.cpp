@@ -1,15 +1,17 @@
 #include "sgc/graphics/sprite.hpp"
 #include "sgc/coordinates/screenworld.hpp"
 
-sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, tile::TilesetPosition2D gridPosition) :
+sgc::graphics::Sprite::Sprite(std::shared_ptr<Tileset> tileset, tile::TilePosition2D gridPosition) :
     m_tileset(tileset)
 {
     this->SetTilesetPosition(gridPosition);
 }
 
-void sgc::graphics::Sprite::SetTilesetPosition(tile::TilesetPosition2D gridPosition)
+void sgc::graphics::Sprite::SetTilesetPosition(tile::TilePosition2D gridPosition)
 {
-    m_tilesetPosition = static_cast<tile::TileId>(gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x);
+    m_tilesetPosition = static_cast<tile::TileId>(
+        gridPosition.y * m_tileset->GetSizeInTiles().x + gridPosition.x
+    );
 }
 
 void sgc::graphics::Sprite::SetTilesetPosition(tile::TileId tileId)
