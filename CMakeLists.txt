@@ -84,7 +84,7 @@ add_library(sdl-game-core STATIC
     src/math/vector.cpp
 
     src/messaging/eventbus.cpp
-    src/messaging/event.cpp
+    src/messaging/pollsdlevents.cpp
 )
 
 option(SHOW_DEBUG_LOGS "Enable verbose debug logs" OFF)
