@@ -1,40 +1,14 @@
 #pragma once
 
+#include "sgc/coordinates/position.hpp"
 #include <cstdint>
-#include "sgc/math/vector.hpp"
 
 namespace sgc::tile 
 {
-    struct TilePosition2D : public math::vec2 
-    {
-        TilePosition2D() = default;
-        TilePosition2D(const TilePosition2D&) = default;
-        TilePosition2D(const math::ival &x, const math::ival &y) : math::vec2{x,y} {}
-        TilePosition2D(const math::vec2& other) : math::vec2{other} {}
-        TilePosition2D& operator=(const math::vec2& other)
-        {
-            x = other.x;
-            y = other.y;
-
-            return *this;
-        }
-    };
-
-    struct TileSize2D : public math::vec2 
-    {
-        TileSize2D() = default;
-        TileSize2D(const TileSize2D&) = default;
-        TileSize2D(const math::ival &x, const math::ival &y) : math::vec2{x,y} {}
-        TileSize2D(const math::vec2& other) : math::vec2{other} {}
-        TileSize2D& operator=(const math::vec2& other)
-        {
-            x = other.x;
-            y = other.y;
-
-            return *this;
-        }
-    };
-    
+    struct TileType {};
+    using TilePosition2D = coordinates::Position2D<TileType>;
+    using TileSize2D = coordinates::Size2D<TileType>;
+    using TileOffset2D = coordinates::PositionOffset2D<TileType>;
     using TileId = uint32_t;
 
     struct Tile {        
