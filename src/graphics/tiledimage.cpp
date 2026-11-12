@@ -24,7 +24,7 @@ void sgc::graphics::TiledImage::SetPositionPixels(sgc::math::fvec2 position)
     auto tileSize = m_layer->GetTileset().GetTileSize();
     
     m_position = position;
-    m_tilePosition = {
+    m_tilePosition = sgc::tile::TilePosition2D{
         static_cast<int>(std::floor(position.x / tileSize.x)),
         static_cast<int>(std::floor(position.y / tileSize.y))
     };
@@ -39,7 +39,7 @@ void sgc::graphics::TiledImage::SetPositionPixels(sgc::graphics::PixelPosition2D
         static_cast<float>(position.y)
     };
 
-    m_tilePosition = {
+    m_tilePosition = sgc::tile::TilePosition2D{
         static_cast<int>(std::floor(position.x / tileSize.x)),
         static_cast<int>(std::floor(position.y / tileSize.y))
     };
