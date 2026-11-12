@@ -47,7 +47,7 @@ namespace sgc::coordinates
             return *this;
         }
 
-        PositionOffset2D<Type>& operator-(const Position2D& other)
+        PositionOffset2D<Type> operator-(const Position2D& other)
         {
             return sgc::coordinates::PositionOffset2D<Type>{
                 x - other.x,
@@ -131,7 +131,7 @@ namespace sgc::coordinates
             return *this;
         }
 
-        SinglesPositionOffset2D<Type>& operator-(const SinglesPosition2D& other)
+        SinglesPositionOffset2D<Type> operator-(const SinglesPosition2D& other)
         {
             return sgc::coordinates::SinglesPositionOffset2D<Type>{
                 x - other.x,
