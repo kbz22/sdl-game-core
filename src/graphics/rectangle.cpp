@@ -80,12 +80,12 @@ void sgc::graphics::Rectangle::Draw(const RenderContext& context)
         m_color.a
     );
 
-    auto position = coordinates::WorldToScreen(
+    auto position = coordinates::ToScreen(
         {m_rect.x, m_rect.y},
         context.view
     );
 
-    auto size = coordinates::WorldToScreen(
+    auto size = coordinates::ToScreen(
         {m_rect.x + m_rect.w, m_rect.y + m_rect.h},
         context.view
     );

@@ -58,12 +58,12 @@ void sgc::graphics::Line::Draw(const RenderContext& context)
         m_color.a
     );
 
-    auto screenStart = coordinates::WorldToScreen(
+    auto screenStart = coordinates::ToScreen(
         m_start,
         context.view
     );
 
-    auto screenEnd = coordinates::WorldToScreen(
+    auto screenEnd = coordinates::ToScreen(
         m_end,
         context.view
     );

@@ -1,6 +1,8 @@
 #include "sgc/coordinates/screenworld.hpp"
 
-sgc::math::fvec2 sgc::coordinates::ScreenToWorld(sgc::math::fvec2 position, const graphics::View view)
+using sgc::coordinates::WorldPosition2D, sgc::coordinates::ScreenPosition;
+
+WorldPosition2D sgc::coordinates::ToWorld(ScreenPosition position, const graphics::View &view)
 {
     return {
         (position.x - view.screen.x) * view.camera.w / view.screen.w + view.camera.x,
@@ -8,7 +10,7 @@ sgc::math::fvec2 sgc::coordinates::ScreenToWorld(sgc::math::fvec2 position, cons
     };
 }
 
-sgc::math::fvec2 sgc::coordinates::WorldToScreen(sgc::math::fvec2 position, const graphics::View view)
+ScreenPosition sgc::coordinates::ToScreen(WorldPosition2D position, const graphics::View &view)
 {
     return {
         (position.x - view.camera.x) * view.screen.w / view.camera.w + view.screen.x,

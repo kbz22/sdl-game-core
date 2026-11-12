@@ -1,16 +1,18 @@
 #pragma once
 
 #include "sgc/graphics/viewport.hpp"
-#include "sgc/math/vector.hpp"
+#include "sgc/coordinates/position.hpp"
 
 namespace sgc::coordinates 
 {
-    struct ScreenPosition : public math::fvec2 {};
-    struct WorldPosition2D : public math::fvec2 {};
+    struct WorldType {};
+    struct ScreenType {};
 
-    math::fvec2 ScreenToWorld(math::fvec2 position, const graphics::View view);
-    math::fvec2 WorldToScreen(math::fvec2 position, const graphics::View view);
+    using WorldPosition2D = SinglesPosition2D<WorldType>;
+    using ScreenPosition = SinglesPosition2D<ScreenType>;
+
+    WorldPosition2D ToWorld(ScreenPosition position, const graphics::View &view);
+    ScreenPosition ToScreen(WorldPosition2D position, const graphics::View &view);
     float ScreenToWorld(float value, const graphics::View view);
     float WorldToScreen(float value, const graphics::View view);
-
 }

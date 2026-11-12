@@ -96,12 +96,12 @@ void sgc::graphics::LineGrid::Draw(const RenderContext& context)
             static_cast<float>(m_position.y + m_size.y)
         };
 
-        auto screenStart = sgc::coordinates::WorldToScreen(
+        auto screenStart = sgc::coordinates::ToScreen(
             worldStart,
             context.view
         );
 
-        auto screenEnd = sgc::coordinates::WorldToScreen(
+        auto screenEnd = sgc::coordinates::ToScreen(
             worldEnd,
             context.view
         );
@@ -127,12 +127,12 @@ void sgc::graphics::LineGrid::Draw(const RenderContext& context)
             static_cast<float>(m_position.y + y)
         };
 
-        auto screenStart = sgc::coordinates::WorldToScreen(
+        auto screenStart = sgc::coordinates::ToScreen(
             worldStart,
             context.view
         );
 
-        auto screenEnd = sgc::coordinates::WorldToScreen(
+        auto screenEnd = sgc::coordinates::ToScreen(
             worldEnd,
             context.view
         );

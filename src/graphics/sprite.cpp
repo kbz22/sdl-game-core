@@ -40,12 +40,12 @@ void sgc::graphics::Sprite::Draw(const RenderContext& context)
         static_cast<float>(m_position.y)
     };
 
-    auto screenPosition = sgc::coordinates::WorldToScreen(
+    auto screenPosition = sgc::coordinates::ToScreen(
         worldPosition,
         context.view
     );
 
-    auto screenBottomRight = sgc::coordinates::WorldToScreen({
+    auto screenBottomRight = sgc::coordinates::ToScreen({
             worldPosition.x + m_tileset->m_tileSize.x,
             worldPosition.y + m_tileset->m_tileSize.y
         },

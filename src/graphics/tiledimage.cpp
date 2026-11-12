@@ -101,12 +101,12 @@ void sgc::graphics::TiledImage::Draw(RenderContext const& context)
             static_cast<float>(tile.position.y) * tileSize.y + m_position.y
         };
 
-        auto screenPosition = sgc::coordinates::WorldToScreen(
+        auto screenPosition = sgc::coordinates::ToScreen(
             worldPosition,
             context.view
         );
 
-        auto screenBottomRight = sgc::coordinates::WorldToScreen(
+        auto screenBottomRight = sgc::coordinates::ToScreen(
             {
                 worldPosition.x + tileSize.x,
                 worldPosition.y + tileSize.y
