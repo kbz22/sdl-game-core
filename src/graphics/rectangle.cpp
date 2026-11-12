@@ -30,8 +30,8 @@ sgc::graphics::PixelPosition2D sgc::graphics::Rectangle::GetPosition() const
 sgc::graphics::PixelSize2D sgc::graphics::Rectangle::GetSize() const
 {
     return sgc::graphics::PixelSize2D{
-        static_cast<sgc::math::uval>(m_rect.w),
-        static_cast<sgc::math::uval>(m_rect.h)
+        static_cast<sgc::math::ival>(m_rect.w),
+        static_cast<sgc::math::ival>(m_rect.h)
     };
 }
 

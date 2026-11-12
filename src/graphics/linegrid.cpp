@@ -7,12 +7,12 @@ sgc::graphics::LineGrid::LineGrid(int x, int y, int width, int height, int cellW
         static_cast<sgc::math::ival>(y)
     },
     m_size{
-        static_cast<sgc::math::uval>(width),
-        static_cast<sgc::math::uval>(height)
+        static_cast<sgc::math::ival>(width),
+        static_cast<sgc::math::ival>(height)
     },
     m_cellSize{
-        static_cast<sgc::math::uval>(cellWidth),
-        static_cast<sgc::math::uval>(cellHeight)
+        static_cast<sgc::math::ival>(cellWidth),
+        static_cast<sgc::math::ival>(cellHeight)
     }
 {}
 

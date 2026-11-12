@@ -75,6 +75,7 @@ add_library(sdl-game-core STATIC
     src/graphics/line.cpp
     src/graphics/drawablecontainer.cpp
     src/graphics/drawablelayers.cpp
+    src/graphics/pixel.cpp
 
     src/sdl/sdl.cpp
     src/sdl/sdl_win32.cpp

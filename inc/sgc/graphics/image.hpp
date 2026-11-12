@@ -1,18 +1,15 @@
 #pragma once
 
 #include "sgc/math/vector.hpp"
+#include "sgc/graphics/pixel.hpp"
 
 #include <SDL3/SDL.h>
 #include <memory>
 #include <vector>
 #include <filesystem>
 
-namespace sgc::graphics {
-
-    using PixelSize2D = math::vec2;
-    using PixelPosition2D = math::vec2;
-    using PixelCount = math::ival;
-
+namespace sgc::graphics 
+{
     class Tileset;    
 
     struct TextureDeleter {
