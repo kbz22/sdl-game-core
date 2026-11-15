@@ -14,6 +14,12 @@ Subscription::Subscription(EventBus *bus, TypeId type, SubscriptionId id) :
     m_id{id}
 {}
 
+Subscription::Subscription(Subscription&& other) :
+    m_bus(std::exchange(other.m_bus, nullptr)),
+    m_type(other.m_type),
+    m_id(other.m_id)
+{}
+
 Subscription::~Subscription()
 {
     this->reset();
@@ -21,8 +27,11 @@ Subscription::~Subscription()
 
 inline void Subscription::reset()
 {
-    m_bus->Unsubscribe(m_type, m_id);    
-    m_bus = nullptr;
+    if(m_bus != nullptr)
+    {
+        m_bus->Unsubscribe(m_type, m_id);    
+        m_bus = nullptr;
+    }
 }
 
 TypeId EventBus::NextTypeId()

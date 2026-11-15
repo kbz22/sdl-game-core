@@ -19,7 +19,9 @@ namespace sgc::messaging
         public:
             Subscription() = default;
             Subscription(const Subscription&) = delete;
+            Subscription(Subscription&& other);
             Subscription& operator=(const Subscription&) = delete;
+
             ~Subscription();
 
             void reset();
