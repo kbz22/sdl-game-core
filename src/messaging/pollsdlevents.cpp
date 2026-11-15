@@ -104,4 +104,6 @@ void sgc::sdl::PollSdlEvents(EventBus &bus)
             }
         }
     }
+
+    eventBus.Flush();
 }

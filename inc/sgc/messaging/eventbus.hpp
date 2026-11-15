@@ -86,6 +86,11 @@ namespace sgc::messaging
                     }
                 }
 
+                void Post(const E& e)
+                {
+                    incoming.push_back(e);
+                }
+
                 void Flush() override
                 {
                     processing.swap(incoming);
@@ -154,7 +159,7 @@ namespace sgc::messaging
             template<Event E>
             void Post(E event)
             {
-                GetChannel<E>().Deliver(event);
+                GetChannel<E>().Post(event);
             }
         
             // if the call must be synchronous.

@@ -47,3 +47,11 @@ void EventBus::Unsubscribe(TypeId type, SubscriptionId id)
         m_channels[type]->Remove(id);
     }    
 }
+
+void EventBus::Flush()
+{
+    for(auto &channel : m_channels)
+    {
+        channel->Flush();
+    }
+}
