@@ -11,6 +11,7 @@
 namespace sgc::data {
 
     constexpr size_t c_packageMagicSize = 4;
+    constexpr uint32_t c_version = 1;
     constexpr inline uint8_t c_packageMagic[c_packageMagicSize] = { 'S', 'G', 'C', 'P' };
 
     struct PackageHeader {
@@ -31,7 +32,6 @@ namespace sgc::data {
     class Package 
     {
         private:
-            // mutable std::ifstream m_stream;
             std::vector<uint8_t> m_data;
             std::unordered_map<AssetId, PackageEntry> m_entries;
             size_t m_dataOffset = 0;
