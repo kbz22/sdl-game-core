@@ -9,17 +9,19 @@
 namespace sgc::asset
 {
     using data::AssetId;
-    using Metadata = std::variant<std::wstring>;
+    using Metadata = std::variant<std::wstring>;    
 
     enum class MetadataType : uint16_t
     {
         Name,
     };
+
+    using MetadataMap = std::unordered_map<MetadataType, Metadata>;
+    using AssetMetadataMap = std::unordered_map<AssetId, MetadataMap>;
     
     struct AssetMetadata
     {
-        AssetId assetId;
-        std::unordered_map<MetadataType, Metadata> data;
+        AssetMetadataMap data;
     };
 
     template<>
