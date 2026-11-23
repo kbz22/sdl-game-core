@@ -30,7 +30,7 @@ bool sgc::data::PackageBuilder::Save(const std::filesystem::path& path)
     header.magic[1] = 'G';
     header.magic[2] = 'C';
     header.magic[3] = 'P';
-    header.version = c_version;
+    header.version = c_packageVersion;
     header.assetCount = static_cast<uint32_t>(m_assetMap.size());
 
     header.tableOffset = sizeof(PackageHeader);
@@ -77,7 +77,7 @@ std::vector<uint8_t> sgc::data::PackageBuilder::Build()
 {        
     PackageHeader header{};
     std::memcpy(header.magic, sgc::data::c_packageMagic, sgc::data::c_packageMagicSize);
-    header.version = c_version;
+    header.version = c_packageVersion;
     header.assetCount = static_cast<uint32_t>(m_assetMap.size());
     header.tableOffset = sizeof(PackageHeader);
 

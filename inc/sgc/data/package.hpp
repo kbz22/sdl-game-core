@@ -11,7 +11,7 @@
 namespace sgc::data {
 
     constexpr size_t c_packageMagicSize = 4;
-    constexpr uint32_t c_version = 1;
+    constexpr uint32_t c_packageVersion = 2;
     constexpr inline uint8_t c_packageMagic[c_packageMagicSize] = { 'S', 'G', 'C', 'P' };
 
     struct PackageHeader {
@@ -36,6 +36,7 @@ namespace sgc::data {
             std::unordered_map<AssetId, PackageEntry> m_entries;
             size_t m_dataOffset = 0;
             size_t m_fileSize = 0;
+            uint32_t m_version;
                 
         public:
             bool Open(const std::filesystem::path& path);
@@ -44,6 +45,7 @@ namespace sgc::data {
             bool HasAsset(AssetId id) const;
             const PackageEntry& GetEntry(AssetId id) const;
             std::vector<uint8_t> ReadAssetData(AssetId id) const;
+            uint32_t GetVersion() const;
 
             auto begin() { return m_entries.begin(); }
             auto end()   { return m_entries.end(); }

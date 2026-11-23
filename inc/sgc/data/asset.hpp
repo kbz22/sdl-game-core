@@ -16,6 +16,7 @@ namespace sgc::data {
         Tileset,
         Texture,
 
+        Metadata,
         External,
 
         Count

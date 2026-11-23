@@ -1,7 +1,9 @@
 #include "sgc/data/package.hpp"
 #include <fstream>
 
-bool sgc::data::Package::Open(const std::filesystem::path& path)
+using sgc::data::Package, sgc::data::PackageEntry;
+
+bool Package::Open(const std::filesystem::path& path)
 {
     std::ifstream stream(path, std::ios::binary);
 
@@ -25,6 +27,7 @@ bool sgc::data::Package::Open(const std::filesystem::path& path)
     }
 
     m_dataOffset = header.dataOffset;
+    m_version = header.version;
 
     // Read table
     stream.seekg(header.tableOffset);
@@ -50,7 +53,7 @@ bool sgc::data::Package::Open(const std::filesystem::path& path)
     return true;
 }
 
-bool sgc::data::Package::Open(std::span<uint8_t> data)
+bool Package::Open(std::span<uint8_t> data)
 {
     PackageHeader header;
 
@@ -84,7 +87,7 @@ bool sgc::data::Package::Open(std::span<uint8_t> data)
     return true;
 }
 
-std::vector<uint8_t> sgc::data::Package::ReadAssetData(AssetId id) const
+std::vector<uint8_t> Package::ReadAssetData(AssetId id) const
 {
     auto it = m_entries.find(id);
     if (it == m_entries.end())
@@ -109,16 +112,21 @@ std::vector<uint8_t> sgc::data::Package::ReadAssetData(AssetId id) const
     return data;
 }
 
-bool sgc::data::Package::HasAsset(AssetId id) const
+bool Package::HasAsset(AssetId id) const
 {
     return m_entries.find(id) != m_entries.end();
 }
 
-const sgc::data::PackageEntry& sgc::data::Package::GetEntry(AssetId id) const
+const PackageEntry& Package::GetEntry(AssetId id) const
 {
     auto it = m_entries.find(id);
     if (it == m_entries.end())
         throw std::runtime_error("Asset not found in package");
 
     return it->second;
+}
+
+uint32_t Package::GetVersion() const
+{
+    return m_version;
 }
