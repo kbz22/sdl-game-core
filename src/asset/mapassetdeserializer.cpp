@@ -16,7 +16,7 @@ sgc::asset::MapAsset sgc::asset::AssetDeserializer<sgc::asset::MapAsset>::Deseri
 
     mapAsset.layers.resize(layerCount);
     for(size_t i = 0; i < layerCount; ++i) {
-        size_t index = layerCount - 1 - i; // Reverse order to match rendering order
+        size_t index = i; // obviously don't reverse the order in the library deserializer lmaoo
         mapAsset.layers[index].name = reader.ReadString();
 
         auto tagCount = reader.Read<size_t>();
