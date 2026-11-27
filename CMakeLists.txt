@@ -55,6 +55,7 @@ add_library(sdl-game-core STATIC
     src/asset/assetheaderserializer.cpp
     src/asset/assetheaderdeserializer.cpp
     src/asset/metadataasset.cpp
+    src/asset/binaryasset.cpp
 
     src/data/chunkedtilestorage.cpp
     src/data/statictilestorage.cpp
