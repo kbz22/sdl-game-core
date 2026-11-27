@@ -11,9 +11,7 @@ void sgc::data::PackageBuilder::AddAsset(
     m_assetMap[id] = { { id, type, data.size() }, data };
 }
 
-void sgc::data::PackageBuilder::AddAsset(
-    BinaryAsset asset
-)
+void sgc::data::PackageBuilder::AddAsset(const PackageBuilderEntry &asset)
 {
     m_assetMap[asset.header.id] = asset;
 }

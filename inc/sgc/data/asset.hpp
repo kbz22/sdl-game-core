@@ -33,12 +33,7 @@ namespace sgc::data {
         sizeof(data::AssetId) +
         sizeof(data::AssetType) +
         sizeof(size_t);
-    
-    struct BinaryAsset {
-        AssetHeader header;
-        std::vector<uint8_t> data;
-    };
-
+        
     inline AssetId HashAsset(const std::string& str)
     {
         uint64_t hash = 14695981039346656037ull; // FNV offset basis
