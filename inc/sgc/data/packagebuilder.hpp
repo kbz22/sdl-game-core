@@ -1,6 +1,7 @@
 #pragma once
 
 #include "sgc/data/asset.hpp"
+#include "sgc/data/package.hpp"
 #include <vector>
 #include <filesystem>
 #include <unordered_map>
@@ -18,6 +19,11 @@ namespace sgc::data
             std::unordered_map<AssetId, PackageBuilderEntry> m_assetMap;
 
         public:
+            PackageBuilder() = default;
+            PackageBuilder(sgc::data::Package &package);
+            PackageBuilder(const PackageBuilder&) = default;
+            PackageBuilder(PackageBuilder&&) = default;
+
             void AddAsset(
                 AssetId id,
                 AssetType type,

@@ -3,6 +3,20 @@
 #include "sgc/asset/assetheader.hpp"
 #include <fstream>
 
+using sgc::data::PackageBuilder;
+
+PackageBuilder::PackageBuilder(sgc::data::Package &package)
+{
+    for(auto &[id, entry] : package)
+    {
+        AddAsset(
+            id,
+            entry.type,
+            package.ReadAssetData(id)
+        );
+    }
+}
+
 void sgc::data::PackageBuilder::AddAsset(
     AssetId id,
     AssetType type,
