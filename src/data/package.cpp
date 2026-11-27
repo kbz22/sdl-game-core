@@ -137,3 +137,35 @@ uint32_t Package::GetVersion() const
 {
     return m_version;
 }
+
+void Package::SetAssetData(AssetId id, std::vector<uint8_t> data)
+{
+    auto it = m_entries.find(id);
+    if (it == m_entries.end())
+    {
+        auto message = std::format("Package::SetAssetData(): no entry for id {}", id);
+        throw PackageAssetNotFound(message);
+    }
+
+    PackageEntry& entry = it->second;    
+
+    if (entry.offset + entry.size > m_fileSize)
+    {
+        auto message = std::format("Package::SetAssetData(): data outside range for id {}", id);
+        throw PackageAssetNotFound(message);
+    }
+
+    auto dataBegin = m_data.begin() + entry.offset;
+    m_data.erase(
+        dataBegin,
+        dataBegin + entry.size
+    );
+
+    m_data.insert(
+        dataBegin,
+        data.begin(),
+        data.begin() + data.size()
+    );
+
+    entry.size = data.size();
+}

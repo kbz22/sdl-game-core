@@ -36,7 +36,7 @@ namespace sgc::data {
             std::unordered_map<AssetId, PackageEntry> m_entries;
             size_t m_dataOffset = 0;
             size_t m_fileSize = 0;
-            uint32_t m_version;
+            uint32_t m_version = 0;
                 
         public:
             bool Open(const std::filesystem::path& path);
@@ -46,6 +46,8 @@ namespace sgc::data {
             const PackageEntry& GetEntry(AssetId id) const;
             std::vector<uint8_t> ReadAssetData(AssetId id) const;
             uint32_t GetVersion() const;
+
+            void SetAssetData(AssetId id, std::vector<uint8_t> data);
 
             auto begin() { return m_entries.begin(); }
             auto end()   { return m_entries.end(); }
