@@ -1,4 +1,5 @@
 #include "sgc/data/package.hpp"
+#include "sgc/data/except.hpp"
 #include <fstream>
 
 using sgc::data::Package, sgc::data::PackageEntry;
@@ -91,18 +92,21 @@ std::vector<uint8_t> Package::ReadAssetData(AssetId id) const
 {
     auto it = m_entries.find(id);
     if (it == m_entries.end())
-        return {};
+    {
+        auto message = std::format("Package::ReadAssetData(): no entry for id {}", id);
+        throw PackageAssetNotFound(message);
+    }
 
     const PackageEntry& entry = it->second;
 
     std::vector<uint8_t> data;
 
     if (entry.offset + entry.size > m_fileSize)
-        return {};
+    {
+        auto message = std::format("Package::ReadAssetData(): data outside range for id {}", id);
+        throw PackageAssetNotFound(message);
+    }
 
-    /* stream.seekg(entry.offset);
-    stream.read(reinterpret_cast<char*>(data.data()), entry.size); */
-    // std::memcpy(data.data(), m_data.data() + entry.offset, entry.size);
     data.insert(
         data.begin(),
         m_data.data() + entry.offset,
@@ -121,7 +125,10 @@ const PackageEntry& Package::GetEntry(AssetId id) const
 {
     auto it = m_entries.find(id);
     if (it == m_entries.end())
-        throw std::runtime_error("Asset not found in package");
+    {
+        auto message = std::format("Package::GetEntry(): no entry for id {}", id);
+        throw PackageAssetNotFound(message);
+    }   
 
     return it->second;
 }
